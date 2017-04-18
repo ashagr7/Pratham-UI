@@ -1,0 +1,137 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a ui-sref="/">Home</a></li>
+      <li><a ui-sref="/Agents">Agents</a></li>
+      <li class="active">{{pageTitle}}</li>
+   </ol>
+</div>
+<form name="addAgentForm" class="form" method="POST" novalidate="novalidate">
+   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
+      <div class="field">
+         <label ng-show="addAgent.type" class="show-hide">Agent Type</label>
+         <select class="form-control" name="type" ng-model="addAgent.type" ng-required="true" ng-class="{blankInput: addAgentForm.type.$error.required &amp;&amp; submit}">
+            <option value="">
+               Agent Type
+            </option>
+            <option value="6">
+               Firm
+            </option>
+            <option value="5">
+               Individual
+            </option>
+         </select>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.firstName" class="show-hide">First Name*</label>
+         <input type="text" placeholder="First Name*" class="form-control" name="firstName" ng-model="addAgent.firstName" ng-required="true" ng-class="{blankInput: addAgentForm.firstName.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.middleName" class="show-hide">Middle Name</label>
+         <input type="text" placeholder="Middle Name" class="form-control" name="middleName" ng-model="addAgent.middleName"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.lastName" class="show-hide">Last Name *</label>
+         <input type="text" placeholder="Last Name*" class="form-control" name="lastName" ng-model="addAgent.lastName" ng-required="true" ng-class="{blankInput: addAgentForm.lastName.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.agentCode" class="show-hide">Agent Code *</label>
+         <input type="text" placeholder="Agent Code*" class="form-control" name="agentCode" ng-model="addAgent.agentCode" ng-required="true" ng-class="{blankInput: addAgentForm.agentCode.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.password" class="show-hide">Password *</label>
+         <input type="password" placeholder="Password*" ng-show="addAgentBtn" class="form-control" name="password" ng-model="addAgent.password" ng-required="true" ng-class="{blankInput: addAgentForm.password.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.firmName" class="show-hide">Firm Name *</label>
+         <input type="text" placeholder="Firm Name*" class="form-control" name="firmName" ng-model="addAgent.firmName" ng-required="true" ng-class="{blankInput: addAgentForm.firmName.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.emailId" class="show-hide">Email ID *</label>
+         <input type="text" placeholder="Email ID *" class="form-control" name="emailId" ng-model="addAgent.emailId" ng-required="true" ng-class="{blankInput: addAgentForm.emailId.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.address" class="show-hide">Address *</label>
+         <input type="text" placeholder="Address *" class="form-control"  name="address" ng-model="addAgent.address" ng-required="true" ng-class="{blankInput: addAgentForm.address.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.mobileNumber" class="show-hide">Mobile Number *</label>
+         <input type="text" placeholder="Mobile Number*" class="form-control" name="mobileNumber" ng-model="addAgent.mobileNumber" ng-required="true" ng-class="{blankInput: addAgentForm.mobileNumber.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.pan" class="show-hide">Pan</label>
+         <input type="text" placeholder="PAN" class="form-control" name="pan" ng-model="addAgent.pan" ng-required="true" ng-class="{blankInput: addAgentForm.pan.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.aadhar" class="show-hide">Aadhar</label>
+         <input type="text" placeholder="AADHAR" class="form-control" name="aadhar" ng-model="addAgent.aadhar" ng-required="true" ng-class="{blankInput: addAgentForm.aadhar.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.alternateContactNumber" class="show-hide">Alternate Contact Number</label>
+         <input type="text" placeholder="Alternate Contact Number" class="form-control" name="alternateContactNumber" ng-model="addAgent.alternateContactNumber"/>
+      </div>
+   </div>
+   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form">
+       <div class="field">
+         <label ng-show="addAgent.agentRole" class="show-hide">Agent Role</label>
+         <select class="form-control" name="type" ng-model="addAgent.agentRole" ng-required="true" ng-class="{blankInput: addAgentForm.agentRole.$error.required &amp;&amp; submit}">
+            <option value="">
+               Select Role
+            </option>
+            <option ng-repeat="x in rolesList" value="{{x.role_id}}">
+               {{x.role_name}}
+            </option>
+         </select>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.alternameEmailId" class="show-hide">Alternate Email ID</label>
+         <input type="text" placeholder="Alternate Email ID" class="form-control" name="alternameEmailId" ng-model="addAgent.alternameEmailId"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.contactPerson" class="show-hide">Contact Person *</label>
+         <input type="text" placeholder="Contact Person *" class="form-control" name="contactPerson" ng-model="addAgent.contactPerson" ng-required="true" ng-class="{blankInput: addAgentForm.contactPerson.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.serviceTaxDetails" class="show-hide">Service Tax Details *</label>
+         <input type="text" placeholder="Service Tax Details *" class="form-control" name="serviceTaxDetails" ng-model="addAgent.serviceTaxDetails" ng-required="true" ng-class="{blankInput: addAgentForm.serviceTaxDetails.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.yearsInBusiness" class="show-hide">No. of years in business *</label>
+         <input type="text" placeholder="No. of years in business *" class="form-control" name="yearsInBusiness" ng-model="addAgent.yearsInBusiness" ng-required="true" ng-class="{blankInput: addAgentForm.yearsInBusiness.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.totalYearOfExp" class="show-hide">Total years of Experience *</label>
+         <input type="text" placeholder="Total years of Experience *" class="form-control" name="totalYearOfExp" ng-model="addAgent.totalYearOfExp" ng-required="true" ng-class="{blankInput: addAgentForm.totalYearOfExp.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.totCtc" class="show-hide">Total CTC *</label>
+         <input type="text" placeholder="Total CTC *" class="form-control" name="totCtc" ng-model="addAgent.totCtc" ng-required="true" ng-class="{blankInput: addAgentForm.totCtc.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.bankName" class="show-hide">Bank Name *</label>
+         <input type="text" placeholder="Bank Name *" class="form-control" name="bankName" ng-model="addAgent.bankName" ng-required="true" ng-class="{blankInput: addAgentForm.bankName.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.accountNumber" class="show-hide">Account Number *</label>
+         <input type="text" placeholder="Account Number *" class="form-control" name="accountNumber" ng-model="addAgent.accountNumber" ng-required="true" ng-class="{blankInput: addAgentForm.accountNumber.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.bankAddress" class="show-hide">Bank Address *</label>
+         <input type="text" placeholder="Bank Address *" class="form-control" name="bankAddress" ng-model="addAgent.bankAddress" ng-required="true" ng-class="{blankInput: addAgentForm.bankAddress.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.accountType" class="show-hide">Account Type *</label>
+         <input type="text" placeholder="Account Type *" class="form-control" name="accountType" ng-model="addAgent.accountType" ng-required="true" ng-class="{blankInput: addAgentForm.accountType.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="addAgent.ifscCode" class="show-hide">IFSC Code *</label>
+         <input type="text" placeholder="IFSC Code *" class="form-control" name="ifscCode" ng-model="addAgent.ifscCode" ng-required="true" ng-class="{blankInput: addAgentForm.ifscCode.$error.required &amp;&amp; submit}"/>
+      </div>
+   </div>
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+      <button type="button" class="btn btn-success" ng-click="addAgent(addAgent,'addAgentForm')" ng-show="addAgentBtn">+ Add Agent</button>
+      <button type="button" class="btn btn-success" ng-click="updateAgent(addAgent,'addAgentForm')" ng-show="editAgentBtn">+ Update Agent</button>
+   </div>
+</form>

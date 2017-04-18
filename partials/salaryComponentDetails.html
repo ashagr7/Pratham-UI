@@ -1,0 +1,143 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>Salary Component Listing</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <ol class="breadcrumb">
+      <li><a ui-sref="/">Home</a></li>
+      <li class="active">Salary Component Details</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+   <a ng-click="addSalaryComponent()" class="btn btn-primary">+ Add New Salary Component</a>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <input type="text" class="form-control marginBottom5 search" placeholder="Search Salary Head" ng-model="searchEmployee"/>
+   <table class="table dataTable">
+      <thead>
+         <tr>
+            <th>#</th>
+            <th>Salary Head Name</th>
+            <th>Salary Head Code</th>
+            <th>Salary Calculation Value</th>
+            <th>Actions</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="x in salaryComponentDetails | filter:searchEmployee track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{x.SalHeads_Name}}</td>
+            <td>{{x.SalHead_Code}}</td>
+            <td>{{x.SalHead_CalTypVal}}</td>
+            <td><a ng-click="editSalaryComponent($index)"><span class="link">Edit</span></a></td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+<script type="text/ng-template" id="addSalaryComponent.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ok()">&times;</button>
+        <h1>{{pageTitle}}</h1>
+    </div>
+    <div class="modal-body" id="modal-body">
+       <form name="addSalaryComponentForm" class="form" method="POST" novalidate="novalidate">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Salary Component Name</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <input type="text" placeholder="Salary Component Name *" class="form-control" id="salaryComponentName" name="salaryComponentName" ng-model="addSalaryComponent.salaryComponentName" ng-required="true" ng-class="{blankInput: addSalaryComponentForm.salaryComponentName.$error.required &amp;&amp; submit}" autofocus/>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Abbreviation / Code</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <input type="text" placeholder="Abbreviation / Code *" class="form-control" id="salaryAbbreviation" name="salaryAbbreviation" ng-model="addSalaryComponent.salaryAbbreviation" ng-required="true" ng-class="{blankInput: addSalaryComponentForm.salaryAbbreviation.$error.required &amp;&amp; submit}" autofocus/>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Pay Type</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <select class="form-control" name="salaryPayType" ng-model="addSalaryComponent.salaryPayType" ng-required="true" ng-class="{blankInput: addSalaryComponentForm.salaryPayType.$error.required &amp;&amp; submit}">
+                   <option value="">
+                      Pay Type
+                   </option>
+                   <option value="1">
+                      Earnings
+                   </option>
+                   <option value="0">
+                      Deduction
+                   </option>
+                </select>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Tax Status</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0 radioLabel" ng-class="{blankInput: addSalaryComponentForm.salaryTaxStatus.$error.required &amp;&amp; submit}">
+                <input type="radio" name="salaryTaxStatus" ng-model="addSalaryComponent.salaryTaxStatus" ng-required="true" id="taxable" value="0"/>
+                <label for="taxable">Taxable</label>
+                <input type="radio" name="salaryTaxStatus" ng-model="addSalaryComponent.salaryTaxStatus" ng-required="true" id="nonTaxable" value="1"/>
+                <label for="nonTaxable">Non - Taxable</label>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Calculation Type</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <select class="form-control" name="salaryCalculationType" ng-model="addSalaryComponent.salaryCalculationType" ng-required="true" ng-class="{blankInput: addSalaryComponentForm.salaryCalculationType.$error.required &amp;&amp; submit}">
+                   <option value="">
+                      Calculation Type
+                   </option>
+                   <option value="1">
+                      Flat
+                   </option>
+                   <option value="0">
+                      Formula
+                   </option>
+                </select>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Value</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <input type="text" placeholder="Calculation Value *" class="form-control" id="salaryCalculationValue" name="salaryCalculationValue" ng-model="addSalaryComponent.salaryCalculationValue" ng-required="true" ng-class="{blankInput: addSalaryComponentForm.salaryCalculationValue.$error.required &amp;&amp; submit}" autofocus/>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Part Of Ctc</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0 radioLabel" ng-class="{blankInput: addSalaryComponentForm.salaryPartOfCtc.$error.required &amp;&amp; submit}">
+                <input type="radio" name="salaryPartOfCtc" ng-model="addSalaryComponent.salaryPartOfCtc" ng-required="true" id="salaryPartOfCtcNo" value="0"/>
+                <label for="salaryPartOfCtcNo">No</label>
+                <input type="radio" name="salaryPartOfCtc" ng-model="addSalaryComponent.salaryPartOfCtc" ng-required="true" id="salaryPartOfCtcYes" value="1"/>
+                <label for="salaryPartOfCtcYes">Yes</label>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Component Type</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0 radioLabel" ng-class="{blankInput: addSalaryComponentForm.salaryComponentType.$error.required &amp;&amp; submit}">
+                <input type="radio" name="salaryComponentType" ng-model="addSalaryComponent.salaryComponentType" ng-required="true" id="variableComponent" value="1"/>
+                <label for="variableComponent">Variable Component</label>
+                <input type="radio" name="salaryComponentType" ng-model="addSalaryComponent.salaryComponentType" ng-required="true" id="fixedComponent" value="0"/>
+                <label for="fixedComponent">Fixed Component</label>
+             </div>
+          </div>
+       </form>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" ng-show="addSalaryComponentBtn" class="btn btn-success" ng-click="addSalaryComponent(addSalaryComponent,'addSalaryComponentForm')">Save</button>
+      <button type="button" ng-show="editSalaryComponentBtn" class="btn btn-success" ng-click="editSalaryComponent(addSalaryComponent,'addSalaryComponentForm')">Update & Save</button>
+   </div>
+</script>

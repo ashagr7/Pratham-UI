@@ -1,0 +1,73 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>{{title}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">{{title}}</li>
+   </ol>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	<select name="year" class="form-control" ng-model="attendance.year">
+		<option value="2017">2017</option>
+		<option value="2016">2016</option>
+	</select>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	<select name="month" class="form-control" ng-model="attendance.month">
+		<option ng-repeat="x in months" value="{{x.value}}">{{x.name}}</option>
+	</select>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	<button type="button" class="btn btn-primary" ng-click="getDaysArray(attendance)">See Attendance</button>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginTop20">
+   <table class="monthTable" ng-show="showCalender">
+   <tr>
+      <td></td>
+      <td ng-repeat="x in monthDays">
+         {{x.day}}
+      </td>
+   </tr>
+   <tr>
+      <td>Employee</td>
+      <td ng-repeat="x in monthDays">
+         {{x.date}}
+      </td>
+   </tr>
+   <tr ng-repeat="emp in attendanceData">
+	   <td>{{emp.attendance_employeeName}}</td>
+      <td ng-repeat="x in emp.lstattd" class="attendance{{x.attendance_status}}" title="{{x.attendance_ErrorDesc}}" ng-click="markAttendanceModal(x)">
+         {{attendanceCodes[x.attendance_status]}}
+      </td>
+   </tr>
+</table>
+</div>
+<script type="text/ng-template" id="markAttendance.html">
+        <div class="modal-header">
+			<button type="button" class="close" ng-click="ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">{{empAttn.attendance_employeeName}} - Date: {{empAttn.attendance_date | date}}</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+			<form name="markAttnForm" class="form" method="POST" novalidate="novalidate">
+				<select class="form-control" name="attendance_status" ng-model="markAttn.attendance_status" ng-required="true" ng-class="{blankInput: markAttnForm.attendance_status.$error.required &amp;&amp; submit}">
+				<option value="">Mark Attendance</option>
+				<option value="1">Present</option>
+				<option value="2">Absent</option>
+				<option value="3">Leave</option>
+			</select>
+			<select class="form-control marginTop10" name="attendance_leavetype" ng-model="markAttn.attendance_leavetype" ng-show="markAttn.attendance_status == '3'" ng-required="markAttn.attendance_status == '3'" ng-class="{blankInput: markAttnForm.attendance_leavetype.$error.required &amp;&amp; submit}">
+				<option value="">Leave Type</option>
+				<option value="1">Casual Leave</option>
+				<option value="2">Sick Leave</option>
+				<option value="3">Privilege Leave</option>
+				<option value="4">Maternity Leave</option>
+				<option value="5">Paternity Leave</option>
+			</select>
+		</form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="saveAttn('markAttnForm',markAttn)">Save</button>
+			<button class="btn btn-default" type="button" ng-click="ok()">Cancel</button>
+        </div>
+    </script>

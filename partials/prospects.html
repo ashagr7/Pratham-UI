@@ -1,0 +1,292 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+    <h1>Prospects</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+    <ol class="breadcrumb">
+        <li><a ui-sref="/">Home</a></li>
+        <li class="active">Propects</li>
+    </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+    <button class="btn btn-primary" type="button"  ng-click="prospectDetail(prospectIds)">Mass Update </button> 
+    <a ui-sref="/AddProspect" class="btn btn-primary">+ Add Prospect</a> |
+    <button type="button" class="btn btn-success">Import From CSV <span class="glyphicon glyphicon-import"></span></button> |
+    <a href="#">Download Format <span class="glyphicon glyphicon-download-alt"></span></a>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <input type="text" class="form-control marginBottom5 search" placeholder="Search Propects" ng-model="searchLead" />
+    <table class="table dataTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th><input type="checkbox" name="" ng-model="selectAll" ng-click="checkAll()"></th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Sales Funnel</th>
+                <th>Assigned To</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <th>Site Visit</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in leads | filter:searchLead track by $index">
+                <td>{{$index + 1}}</td>
+                <td><input type="checkbox" ng-click="toggleSelection(x.user_id)" name="" ng-model="selected"
+                           ng-checked="exist(x.user_id)" ></td>
+                <td>{{x.user_first_name}} {{x.user_middle_name}} {{x.user_last_name}}</td>
+                <td><span class="leadStatus {{x.user_lead_status_id}}">{{x.user_lead_status_id}}</span></td>
+                <td>{{x.user_salesfunnel_name}}</td>
+                <td>Sales Team <span class="glyphicon glyphicon-circle-arrow-right"></span> {{x.user_assingedto_name}}</td>
+                <td>{{x.registration_date | date:'yyyy-MM-dd'}}</td>
+                <td><span class="link" ng-click="leadDetail($index)">View</span></td>
+                <td>
+                    <a ui-sref="/EditProspect({ leadID: {{x.user_id}} })"><span class="link">Edit</span></a>                 
+                </td>
+                <td> <span class="btn btn-primary" ng-click="addSiteVisit($index)">Site Visit</span></td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/ng-template" id="leadDetail.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ok()">&times;</button>
+        <h3 class="modal-title" id="modal-title">{{lead.user_first_name}} {{lead.user_middle_name}} {{lead.user_last_name}} - <span>{{leadType[lead.user_lead_status_id-1]}}</span></h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="subHeading">Contact Details</div>
+        <table class="leadDetail">
+            <tr>
+                <td>Email ID:</td>
+                <td>{{lead.user_email_address}}</td>
+            </tr>
+            <tr>
+                <td>Mobile Number:</td>
+                <td>{{lead.user_mobile_no}}</td>
+            </tr>
+            <tr ng-if="lead.user_dob !='0001-01-01T00:00:00'">
+                <td>D.O.B:</td>
+                <td>{{lead.user_dob | date}}</td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td>{{cities[lead.user_city-1]}}</td>
+            </tr>
+        </table>
+        <div class="col-md-12 padding0 marginBottom5">
+            <div class="subHeading col-md-6 padding0">Projects</div>
+            <div class="col-md-6 padding0 text-right">
+                <button class="btn btn-default" ng-click="addLeadProjects(lead.user_id)">Update Projects</button>
+            </div>
+        </div>
+        <div ng-show="{{lead.userprojlist==null}}">This lead does not have any projects.</div>
+        <div ng-show="{{lead.userprojlist!=null}}">
+            <table class="table borderDef">
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Phase</th>
+                        <th>Type</th>
+                        <th>Block</th>
+                        <th>Unit</th>
+                    </tr>
+                </thead>
+                <tbody id="projectList">
+                    <tr ng-repeat="unit in leadProjects track by $index" id="{{unit.UnitDtls_Id}}">
+                        <td>{{unit.Proj_Name}}</td>
+                        <td>{{unit.Phase_Name}}</td>
+                        <td>{{getTypeNameById(unit.Phase_UnitType_Id)}}</td>
+                        <td>{{unit.Blocks_Name}}</td>
+                        <td>{{unit.UnitDtls_Name}} / {{unit.phaseType}} No. {{unit.UnitDtls_No}} / {{unit.UnitDtls_Msrmnt}} sq ft / Floor {{unit.UnitDtls_Floor}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">Done</button>
+    </div>
+</script>
+<script type="text/ng-template" id="addSiteVisit.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ok()">&times;</button>
+        <h3 class="modal-title" id="modal-title">Schedule site visit - {{lead.user_first_name}} {{lead.user_middle_name}} {{lead.user_last_name}}</h3>
+    </div>
+    <div class="modal-body pull-left" id="modal-body">
+        <div ng-show="siteVisitData.length>0" class="prevVisits">
+            <h4>Previous Site Vists</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date &amp; Time</th>
+                        <th>Project</th>
+                        <th>Phase</th>
+                        <th>Block</th>
+                        <th>Person</th>
+                        <th>Mobile</th>
+                        <th>Adddress</th>
+                        <th>Walk In</th>
+                         <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in siteVisitData">
+                        <td>{{x.sitevisit_pickupdatetime}}</td>
+                        <td>{{x.sitevisit_projectid}}</td>
+                        <td>{{x.sitevisit_phaseid}}</td>
+                        <td>{{x.sitevisit_blockid}}</td>
+                        <td>{{x.sitevisit_contactperson_name}}</td>
+                        <td>{{x.sitevisit_contactperson_mobile}}</td>
+                        <td>{{x.sitevisit_pickupaddress}}</td>
+                        <td>{{x.sitevisit_walkin}}</td>
+                         <td>{{x.sitevisit_done}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form name="addSiteVisitForm" class="form" method="POST" novalidate="novalidate">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Project</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <select ng-model="addSiteVisit.projectName" name="projectName" class="form-control" ng-change="phaseListFun(addSiteVisit.projectName)" autofocus="true" ng-required="true" ng-class="{blankInput: addSiteVisitForm.projectName.$error.required &amp;&amp; submit}">
+                        <option value="">
+                            Project
+                        </option>
+                        <option ng-repeat="x in projectList" value="{{x.ProjId}}">
+                            {{x.Proj_Name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Phase Type</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <select ng-model="addSiteVisit.phase" name="phase" class="form-control" ng-change="blockListFun(addSiteVisit.phase)" ng-required="true" ng-class="{blankInput: addSiteVisitForm.phase.$error.required &amp;&amp; submit}">
+                        <option value="">
+                            Phase
+                        </option>
+                        <option ng-repeat="x in phaseList" value="{{x.Phase_Id}}">
+                            {{x.Phase_Name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Block Type</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <select ng-model="projectDetails.blocks" name="blocks" class="form-control">
+                        <option value="">
+                            Block
+                        </option>
+                        <option ng-repeat="x in blockList" value="{{x.Blocks_Id}}">
+                            {{x.Blocks_Name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Walk In</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0 radioLabel" ng-class="{blankInput: addSiteVisitForm.walkIn.$error.required &amp;&amp; submit}">
+                    <input type="radio" name="walkIn" ng-model="addSiteVisit.walkIn" ng-required="true" id="yes" value="1" />
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="walkIn" ng-model="addSiteVisit.walkIn" ng-required="true" id="no" value="2" />
+                    <label for="no">No</label>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Date &amp; Time</label>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding0">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='date' class="form-control" name="datetime" ng-model="addSiteVisit.datetime" ng-required="true" ng-class="{blankInput: addSiteVisitForm.datetime.$error.required &amp;&amp; submit}"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <select class="form-control" name="time" ng-model="addSiteVisit.time" ng-required="true" ng-class="{blankInput: addSiteVisitForm.time.$error.required &amp;&amp; submit}">
+                        <option value="">Select Time</option>
+                        <option ng-repeat="x in timeslots" value="{{x}}">
+                            {{x}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Person Name</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <input type="text" placeholder="Person Name *" class="form-control" id="personName" name="personName" ng-model="addSiteVisit.personName" ng-required="true" ng-class="{blankInput: addSiteVisitForm.personName.$error.required &amp;&amp; submit}" autofocus/>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Person Mobile Number</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <input type="text" placeholder="Person Mobile Number *" class="form-control" id="personMobile" name="personMobile" ng-model="addSiteVisit.personMobile" ng-required="true" ng-class="{blankInput: addSiteVisitForm.personMobile.$error.required &amp;&amp; submit}" autofocus/>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                    <label for="projectName">Person Address</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <input type="text" placeholder="Person Address *" class="form-control" id="personAddress" name="personAddress" ng-model="addSiteVisit.personAddress" ng-required="true" ng-class="{blankInput: addSiteVisitForm.personAddress.$error.required &amp;&amp; submit}" autofocus/>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="saveSiteVisit(addSiteVisit,'addSiteVisitForm')">Schedule Site Visit</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="updateProPage.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ok()">&times;</button>
+        <h3 class="modal-title" id="modal-title">Update Prospects</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+    <form class="form-inline" name="form">
+        <div class="form-group">
+            <label class="control-label">Select Updation Type</label>
+             <select class="form-control" ng-click="action()" ng-model="myModel">
+                  <option value="" disabled selected>
+                      --Select--
+                  </option>
+                  <option ng-repeat= "x in firstDropValues" value="{{x.value}}">{{x.name}}</option>
+             </select> 
+        </div>
+        
+        <div class="form-group">
+            <label class="control-label">Select Option</label>
+             <select  class="form-control" ng-model="myModelSecond">
+                  <option value="" disabled selected>
+                      --Select--
+                  </option>
+                  <option ng-repeat= "x in secondDropValues" value="{{x.value}}">{{x.name}}</option>
+             </select> 
+        </div>
+
+    </form></div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="actionSecond()">Save</button>
+    </div>
+</script>

@@ -1,0 +1,336 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>{{title}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">{{title}}</li>
+   </ol>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 marginTop20">
+   <select ng-model="blockCostSheet.projectName" name="projectName" class="form-control" ng-change="phaseListFun(blockCostSheet.projectName)" ng-required="true" ng-class="{blankInput: unitAllocationForm.projectName.$error.required &amp;&amp; submit}" autofocus="true">
+      <option value="">
+         Project
+      </option>
+      <option ng-repeat="x in projectList" value="{{x.ProjId}}">
+         {{x.Proj_Name}}
+      </option>
+   </select>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 marginTop20">
+   <select ng-model="blockCostSheet.phase" name="phase" class="form-control" ng-change="blockListFun(blockCostSheet.phase)" ng-required="true" ng-class="{blankInput: unitAllocationForm.phase.$error.required &amp;&amp; submit}">
+      <option value="">
+         Phase
+      </option>
+      <option ng-repeat="x in phaseList" value="{{x.Phase_Id}}">
+         {{x.Phase_Name}}
+      </option>
+   </select>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 marginTop20">
+   <select ng-model="blockCostSheet.blocks" name="blocks" class="form-control" ng-change="getBlockCostSheet(blockCostSheet.blocks)">
+      <option value="">
+         Block
+      </option>
+      <option ng-repeat="x in blockList" value="{{x.Blocks_Id}}">
+         {{x.Blocks_Name}}
+      </option>
+   </select>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginTop20" ng-show="showComponents">
+<div class="text-right">
+	<a ui-sref="/EditBlockCostSheet({blockId:blockCostSheet.blocks})" class="btn btn-primary">
+		Edit Cost Sheet
+	</a>
+</div>
+<table class="table borderDef marginTop20">
+	<tr>
+		<td>Actual Cost:</td>
+		<td>INR {{costSheetDetail.untctcm_Cost}} / Sq. FT.</td>
+	</tr>
+	<tr>
+		<td>Floor Raise Direction:</td>
+		<td>{{costSheetDetail.untctcm_Ascending}}</td>
+	</tr>
+	<tr>
+		<td>Floor From:</td>
+		<td>{{costSheetDetail.untctcm_From}}</td>
+	</tr>
+	<tr>
+		<td>Floor To:</td>
+		<td>{{costSheetDetail.untctcm_To}}</td>
+	</tr>
+	<tr>
+		<td>Floor Raise Cost:</td>
+		<td>{{costSheetDetail.untctcm_FlrRseCost}}</td>
+	</tr>
+</table>
+<table class="table dataTable">
+   <thead>
+	   <tr>
+		   <th>Code</th>
+		   <th>Name</th>
+		   <th>Calculation Type</th>
+		   <th>Value</th>
+	   </tr>
+   </thead>
+   <tbody>
+   <tr ng-show='costSheetDetail.untctcm_code1!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code1}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name1}}
+   </td>
+   <td>
+	   {{formulaType[costSheetDetail.untctcm_calctyp1]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula1}}
+   </td>
+   </tr>
+   <tr ng-show='costSheetDetail.untctcm_code2!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code2}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name2}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp2]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula2}}
+   </td>
+   </tr>
+   <tr ng-show='costSheetDetail.untctcm_code3!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code3}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name3}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp3]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula3}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code4!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code4}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name4}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp4]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula4}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code5!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code5}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name5}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp5]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula5}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code6!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code6}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name6}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp6]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula6}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code8!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code8}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name8}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp8]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula8}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code9!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code9}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name9}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp9]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula9}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code10!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code10}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name10}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp10]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula10}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code11!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code11}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name11}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp11]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula11}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code12!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code12}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name12}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp12]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula12}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code13!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code13}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name13}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp13]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula13}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code14!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code14}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name14}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp14]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula14}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code15!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code15}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name15}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp15]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula15}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code16!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code16}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name16}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp16]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula16}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code17!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code17}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name17}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp17]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula17}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code18!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code18}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name18}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp18]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula18}}
+   </td>
+   </tr>
+	   <tr ng-show='costSheetDetail.untctcm_code19!=""'>
+   <td>
+   {{costSheetDetail.untctcm_code19}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_name19}}
+   </td>
+   <td>
+   {{formulaType[costSheetDetail.untctcm_calctyp19]}}
+   </td>
+   <td>
+   {{costSheetDetail.untctcm_val_formula19}}
+   </td>
+   </tr>
+   </tbody>
+   </table>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center marginTop20" ng-show="showMessage">
+<h3>{{resMsg}}</h3>
+</div>

@@ -1,0 +1,57 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a ui-sref="/">Home</a></li>
+      <li class="active">{{pageTitle}}</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<form name="createNewRuleForm" class="form" method="POST" novalidate="novalidate">
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+         <label for="ruleName">Rule Name</label>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+         <input type="text" placeholder="Rule Name" class="form-control" name="rule_name" id="rule_name" ng-model="createNewRule.rule_name" ng-required="true" ng-class="{blankInput: createNewRuleForm.rule_name.$error.required &amp;&amp; submit}" autofocus/>
+      </div>
+   </div>
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+         <label for="rule_moduleid">Module</label>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+         <select class="form-control" name="rule_moduleid" id="rule_moduleid" ng-model="createNewRule.rule_moduleid" ng-required="true" ng-class="{blankInput: createNewRuleForm.rule_moduleid.$error.required &amp;&amp; submit}" ng-change="getActionTypes(createNewRule.rule_moduleid)">
+            <option value="">
+               Module
+            </option>
+            <option  ng-repeat="x in modules" value="{{x.module_id}}">
+               {{x.module_name}}
+            </option>
+         </select>
+      </div>
+   </div>
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+         <label for="ruleDescription">Description</label>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+         <textarea type="text" placeholder="Description" class="form-control" name="rule_description" id="rule_description" ng-model="createNewRule.rule_description" ng-required="true" ng-class="{blankInput: createNewRuleForm.rule_description.$error.required &amp;&amp; submit}"></textarea>
+      </div>
+   </div>
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" ng-show="createNewRule.rule_moduleid!=''">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+         <label for="ruleDescription">When</label>
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0 radioLabelBlock" ng-class="{blankInput: createNewRuleForm.rule_actiontypeid.$error.required &amp;&amp; submit}">
+         <div ng-repeat="x in actionTypes">
+            <input type="radio" name="rule_actiontypeid" value="{{x.actiontypeid}}" id="action{{x.actiontypeid}}" ng-model="createNewRule.rule_actiontypeid" ng-required="true"/>
+            <label for="action{{x.actiontypeid}}">{{x.action_name}}</label>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 marginTop20 text-center">
+      <button type="button" class="btn btn-primary" ng-click="saveRule('createNewRuleForm',createNewRule)">Create Rule</button>
+   </div>
+</form>

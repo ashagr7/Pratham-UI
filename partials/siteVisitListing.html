@@ -1,0 +1,42 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<h1>Site Visits Listing</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<ol class="breadcrumb">
+	  <li><a ui-sref="/">Home</a></li>
+	  <li class="active">Site Visit Listing</li>
+	</ol>	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <input type="text" class="form-control marginBottom5 search" placeholder="Search Site Visits" ng-model="searchLead"/>
+	<table class="table dataTable">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Mobile Number</th>
+				<th>Pick Up Address</th>
+				<th>Pick Up time</th>
+				<th>User Id</th>
+				<th>Project Id</th>
+				<th>Phase Id</th>
+				<th>Block Id</th>
+				<th>Site Visit Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in siteVisitDetail | filter:searchLead track by $index">
+				<td>{{$index + 1}}</td>
+				<td>{{x.sitevisit_contactperson_name}}</td>
+				<td>{{x.sitevisit_contactperson_mobile}}</td>
+				<td>{{x.sitevisit_pickupaddress}}</td>
+				<td>{{x.sitevisit_pickupdatetime}}</td>
+				<td>{{x.sitevisit_userid}}</td>
+				<td>{{x.sitevisit_projectid}}</td>
+				<td>{{x.sitevisit_phaseid}}</td>
+				<td>{{x.sitevisit_blockid}}</td>
+                <td><div ng-show="x.sitevisit_done == 1">Done</div><div ng-show="x.sitevisit_done == 2">Pending</div></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

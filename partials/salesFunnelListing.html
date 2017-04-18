@@ -1,0 +1,64 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>Sales Funnel Listing</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <ol class="breadcrumb">
+      <li><a ui-sref="/">Home</a></li>
+      <li class="active">Sales Funnel Details</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+   <a ng-click="addSalesFunnel()" class="btn btn-primary">+ Add New Sales Funnel</a>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <input type="text" class="form-control marginBottom5 search" placeholder="Search Sales Funnel" ng-model="searchSalesFunnel"/>
+   <table class="table dataTable">
+      <thead>
+         <tr>
+            <th>#</th>
+            <th>Sales Funnel Name</th>
+            <th class="text-center">Sales Funnel Sort Order</th>
+            <th>Actions</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="x in salesFunnelDetails | filter:searchSalesFunnel track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{x.salesfunnel_name}}</td>
+            <td class="text-center">{{x.salesfunnel_sortorder}}</td>
+            <td><a ng-click="editSalesFunnel($index)"><span class="link">Edit</span></a></td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+<script type="text/ng-template" id="addSalesFunnel.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ok()">&times;</button>
+        <h1>{{pageTitle}}</h1>
+    </div>
+    <div class="modal-body" id="modal-body">
+       <form name="addSalesFunnelForm" class="form" method="POST" novalidate="novalidate">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Sales Funnel Name</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <input type="text" placeholder="Sales Funnel Name *" class="form-control" id="salesFunnelName" name="salesFunnelName" ng-model="addSalesFunnel.salesFunnelName" ng-required="true" ng-class="{blankInput: addSalesFunnelForm.salesFunnelName.$error.required &amp;&amp; submit}" autofocus/>
+             </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="projectName">Sales Funnel Sort Order</label>
+             </div>
+             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <input type="number" placeholder="Sales Funnel Sort Order *" class="form-control" id="salesFunnelSortOrder" name="salesFunnelSortOrder" ng-model="addSalesFunnel.salesFunnelSortOrder" ng-required="true" ng-class="{blankInput: addSalesFunnelForm.salesFunnelSortOrder.$error.required &amp;&amp; submit}" autofocus/>
+             </div>
+          </div>
+       </form>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" ng-show="addSalesFunnelBtn" class="btn btn-success" ng-click="addSalesFunnel(addSalesFunnel,'addSalesFunnelForm')">Save</button>
+      <button type="button" ng-show="editSalesFunnelBtn" class="btn btn-success" ng-click="editSalesFunnel(addSalesFunnel,'addSalesFunnelForm')">Update & Save</button>
+   </div>
+</script>

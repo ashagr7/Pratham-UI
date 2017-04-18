@@ -1,0 +1,60 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a ui-sref="/">Home</a></li>
+      <li><a ui-sref="/EmailTemplates">Email Templates</a></li>
+      <li class="active">Create New Email Template</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <form>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 emailTempForm padding0">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 templateHeader">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
+               <input type="text" class="templateName form-control" name="templateName" ng-model="template.templateName" placeholder="Enter a Template Name"/>
+               <input type="text" class="templateSubject form-control" name="templateSubject" ng-model="template.templateSubject" placeholder="Enter a Template Subject"/>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right padding0 tempFormHeaderRight">
+               <button type="button" class="btn btn-default">
+               <span class="glyphicon glyphicon-paperclip"></span> Attachments</button>
+               <button type="button" class="btn btn-default">
+               <span class="glyphicon glyphicon-remove"></span> Cancel</button>
+               <button type="button" class="btn btn-default">
+               <span class="glyphicon glyphicon-film"></span> Preview</button>
+               <button type="button" class="btn btn-success">
+               <span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+            </div>
+         </div>
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tempFormCntr2">
+            <div class="col-lg-4 col-md-4 col-sm-4 padding12">
+               <label>Merge Field Types</label>
+               <select class="form-control" name="mergeFieldType" ng-model="template.mergeFieldType" ng-change="getFields(template.mergeFieldType)">
+                  <option value="">Merge Field Types</option>
+                  <option ng-repeat="x in mergeFieldTypes" value="{{x.module_id}}">{{x.module_name}}</option>
+               </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 padding12">
+               <label>Select Fields</label>
+               <select class="form-control" name="fields" ng-model="template.fields" ng-change="copyMergedFields(template.fields)">
+                  <option value="">Select Fields</option>
+                  <option ng-repeat="x in fields" value="{{x.modfield_actualfieldname}}">{{x.modfield_name}}</option>
+               </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 padding12">
+               <label>Copy Merged Fields</label>
+               <input type="text" class="form-control" name="copyMergedFields" ng-model="template.copyMergedFields" ng-readonly="true"/>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4"></div>
+            <div class="col-lg-4 col-md-4 col-sm-4"></div>
+         </div>
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 marginTop10">
+            <div id="contentEditor"></div>
+         </div>
+   </div>
+       <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 marginTop10 text-center ">
+              <button type="button" class="btn btn-success" ng-click="saveTemlate()">Save Template</button>
+         </div>-->
+    </form>
+</div>

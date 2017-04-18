@@ -1,0 +1,100 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<h1>Customers</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<ol class="breadcrumb">
+	  <li><a ui-sref="/">Home</a></li>
+	  <li class="active">Customers</li>
+	</ol>	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <input type="text" class="form-control marginBottom5 search" placeholder="Search Customers" ng-model="searchCustomers"/>
+	<table class="table dataTable">
+		<thead>
+			<tr>
+				<th>#</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email Id</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in customers | filter:searchCustomers track by $index">
+				<td>{{$index + 1}}</td>
+				<td>{{x.user_first_name}} {{x.user_middle_name}} {{x.user_last_name}}</td>
+                 <td>{{x.user_mobile_no}}</td>
+                <td>{{x.user_email_address}}</td>
+				<td><span class="link" ng-click="customerDetail($index)">View</span></td>
+				<td><a ui-sref="/ConvertCustomer({ leadID: {{x.user_id}} , action: 'editCustomer'})"><span class="link">Edit</span></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/ng-template" id="customerDetail.html">
+        <div class="modal-header">
+			<button type="button" class="close" ng-click="ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">{{customer.user_first_name}} {{customer.user_middle_name}} {{customer.user_last_name}}</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+			<div class="subHeading">Contact Details</div>
+			<table class="leadDetail">
+				<tr>
+					<td>Email ID:</td>
+					<td>{{customer.user_email_address}}</td>
+				</tr>
+				<tr>
+					<td>Mobile Number:</td>
+					<td>{{customer.user_mobile_no}}</td>
+				</tr>
+				<tr ng-if="lead.user_dob !='0001-01-01T00:00:00'">
+					<td>D.O.B:</td>
+					<td>{{customer.user_dob | date}}</td>
+				</tr>
+				<tr>
+					<td>City:</td>
+					<td>{{cities[customer.user_city-1]}}</td>
+				</tr>
+            </table>
+            <div class="col-md-12 padding0 marginBottom5">
+                <div class="subHeading col-md-6 padding0">Project</div>
+                <div class="col-md-6 padding0 text-right">
+                    <button class="btn btn-default" ng-click="addLeadProjects(lead.user_id)">Update Projects</button>
+                </div>
+            </div>
+            <div ng-show="{{customer.userprojlist==null}}">This lead does not have any projects.</div>
+			<div ng-show="{{customer.userprojlist!=null}}">
+				<table class="table borderDef">
+				   <thead>
+					  <tr>
+                         <th>Project</th>
+						 <th>Phase</th>
+						 <th>Type</th>
+						 <th>Block</th>
+						 <th>Unit</th>
+                         <th>Status</th>
+                         <th></th>
+					  </tr>
+				   </thead>
+				   <tbody id="projectList">
+					  <tr ng-repeat = "unit in leadProjects track by $index" id="{{unit.UnitDtls_Id}}">
+						 <td>{{unit.Proj_Name}}</td>
+                         <td>{{unit.Phase_Name}}</td>
+                         <td>{{getTypeNameById(unit.Phase_UnitType_Id)}}</td>
+                         <td>{{unit.Blocks_Name}}</td>
+                         <td>{{unit.UnitDtls_Name}} / {{unit.phaseType}} No. {{unit.UnitDtls_No}} / {{unit.UnitDtls_Msrmnt}} sq ft / Floor {{unit.UnitDtls_Floor}}</td>
+                          <td>{{unit.unitViewStatus}}</td>
+                          <td><span class="glyphicon glyphicon-trash delete" ng-click="deleteRow(unit.ProjDtl_Id,unit.UnitDtls_Id)"></span></td>
+					  </tr>
+				   </tbody>
+				</table>
+			</div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Done</button>
+        </div>
+    </script>

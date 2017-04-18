@@ -1,0 +1,118 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>Block Stage -Status </h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20 ng-scope">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a>Scope</a></li>
+      <li class="active">Stage / Status</li>
+   </ol>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 marginBottom20">
+   <form class="form">
+<div>
+   <select ng-model="projectDetails.projectName" name="projectName" class="form-control" ng-change="phaseListFun(projectDetails.projectName)" autofocus="true">
+      <option value="">
+         Project
+      </option>
+      <option ng-repeat="x in projectList" value="{{x.ProjId}}">
+         {{x.Proj_Name}}
+      </option>
+   </select>
+</div>
+<div>
+   <select ng-model="projectDetails.phase" name="phase" class="form-control" ng-change="blockListFun(projectDetails.phase)">
+      <option value="">
+         Phase
+      </option>
+      <option ng-repeat="x in phaseList" value="{{x.Phase_Id}}">
+         {{x.Phase_Name}}
+      </option>
+   </select>
+</div>
+<div class="divLabel">
+   Type: <strong ng-model="projectDetails.flatType">{{flatType}}</strong>
+</div>
+<div>
+   <select ng-model="projectDetails.blocks" name="blocks" class="form-control" ng-change="getBlockStageList(projectDetails.blocks)">
+      <option value="">
+         Block
+      </option>
+      <option ng-repeat="x in blockList" value="{{x.Blocks_Id}}">
+         {{x.Blocks_Name}}
+      </option>
+   </select>
+</div>
+    <div class="marginTop20 text-right">
+        <button type="button" class="btn btn-primary" ng-click="addStatusChange(projectDetails.blocks)">Add Stages</button>
+       </div>
+    </form>
+</div>
+<!--
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <table class="table dataTable">
+      <thead>
+         <tr>
+            <th>#</th>
+            <th>Block Stage Name</th>
+            <th>Completed</th>
+            <th>Action</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="x in blockStageList track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{x.blockstageName}}</td>
+            <td ng-show="x.blocksatgeCompleted == 1">Yes</td>
+            <td ng-show="x.blocksatgeCompleted == 0">No</td>
+            <td><a ng-click="editStatusChange(x.blockstageId, x.blockstageBlockId)"><span class="link">Edit</span></a></td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+-->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="stageBox status{{x.blocksatgeCompleted}}" ng-repeat="x in blockStageList track by $index">
+        <div class="name">
+            {{x.blockstageName}}
+            <span class="glyphicon glyphicon-ok marginLeft10" ng-show="x.blocksatgeCompleted == 1"></span>
+            <span class="glyphicon glyphicon-pencil icon" ng-click="editStatusChange(x.blockstageId, x.blockstageBlockId)"></span>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="blockStatusChange.html">
+   <div class="modal-header">
+      <button type="button" class="close" ng-click="ok()">&times;</button>
+      <h3 class="modal-title" id="modal-title">Add Block Stage</h3>
+   </div>
+   <div class="modal-body" id="modal-body">
+      <div class="subHeading">Add Block Stage Name</div>
+       <form name="blockStageForm" class="form" method="POST" novalidate="novalidate">
+          <table class="leadDetail">
+             <tr>
+                <td>Block Stage Name:</td>
+                <td>
+                   <input type="text" name="blockStageName" class="form-control" ng-model="blockStage.name" placeholder="Block Stage Name" ng-required="true" ng-class="{blankInput: blockStageForm.blockStageName.$error.required &amp;&amp; submit}" />
+                </td>
+             </tr>
+              <tr>
+                <td>Completed:</td>
+                <td>
+                   <div class="radioLabel">
+                       <input type="radio" name="yes" ng-model="blockStage.completed" id="yes" value="1"/>
+                       <label for="yes">Yes</label>
+                       <input type="radio" name="no" ng-model="blockStage.completed" id="no" value="0"/>
+                       <label for="no">No</label>
+                   </div>
+                </td>
+             </tr>
+          </table>
+       </form>
+       </div>
+       <div class="modal-footer" ng-show="blockStage.action == 'add'">
+          <button class="btn btn-primary" type="button" ng-click="addBlockStage(blockStage, 'blockStageForm')">Add Block Stage</button>
+       </div>
+       <div class="modal-footer" ng-show="blockStage.action == 'edit'">
+          <button class="btn btn-primary" type="button" ng-click="editBlockStage(blockStage, 'blockStageForm')">Edit Block Stage</button>
+       </div>
+</script>

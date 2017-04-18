@@ -1,0 +1,104 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>{{title}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+	  <li><a ui-sref="/CostSheetTemplates">Cost Sheet Templates</a></li>
+      <li class="active">{{title}}</li>
+   </ol>
+</div>
+<form name="costSheetTemplateForm" class="form" method="POST" novalidate="novalidate">
+   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 labelDiv">
+            <label>Template Name</label>
+         </div>
+         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padding0">
+            <input type="text" class="form-control" placeholder="Template Name" name="untctcm_templname" ng-model="costSheetTemplate.untctcm_templname" ng-required="true" ng-class="{blankInput: costSheetTemplateForm.untctcm_templname.$error.required &amp;&amp; submit}"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 labelDiv">
+            <label>Actual Price / Sq. Ft.</label>
+         </div>
+         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padding0">
+            <input type="text" class="form-control" placeholder="Actual Price / Sq. Ft." name="untctcm_Cost" ng-model="costSheetTemplate.untctcm_Cost" ng-required="true" ng-class="{blankInput: costSheetTemplateForm.untctcm_Cost.$error.required &amp;&amp; submit}"/>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginTop10">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <button type="button" class="btn btn-default" ng-click="addCostComponent()" ng-show="showAddCmptBtn">
+      Add Cost Component
+      </button>
+      <table class="formulaTable"></table>
+   </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center marginTop10">
+     <button type="button" class="btn btn-success" ng-click="saveCostSheetTemplate('costSheetTemplateForm', costSheetTemplate)">
+      Save Template
+      </button>
+    </div>
+</form>
+
+<script type="text/ng-template" id="formula.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="close()">&times;</button>
+        <h3 class="modal-title" id="modal-title">Cost Component Formula - {{fieldCount}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="row">
+            <form name="formulaForm" class="form" method="POST" novalidate="novalidate">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <label>Abbreviation</label>
+                <select class="form-control" name="abbreviation" ng-model="formula.abbreviation">
+                    <option value="">
+                        Select
+                    </option>
+                    <option value="SBA">
+                        SBA
+                    </option>
+                    <option value="APPS">
+                        APPS
+                    </option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <label>Operator</label>
+                <select class="form-control" name="operator" ng-model="formula.operator">
+                    <option value="">
+                        Select
+                    </option>
+                    <option value="+">
+                        +
+                    </option>
+                    <option value="-">
+                        -
+                    </option>
+                    <option value="*">
+                        *
+                    </option>
+                    <option value="/">
+                        /
+                    </option>
+                    <option value="%">
+                        %
+                    </option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
+                <label class="dispBlock">&nbsp;</label>
+                <button type="button" class="btn btn-info" ng-click="addFormula(formula)">Add</button>
+            </div>
+            </form>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center marginTop10">
+                <input type="text" class="form-control" placeholder="Formula Generated" name="formulaGen" id="formulaGen" ng-model="formulaGen"/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="close()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="saveFormula()">Save</button>
+    </div>
+</script>

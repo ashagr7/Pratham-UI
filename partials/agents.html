@@ -1,0 +1,105 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<h1>Agents</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<ol class="breadcrumb">
+	  <li><a ui-sref="/">Home</a></li>
+	  <li class="active">Agents</li>
+	</ol>	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+    <button class="btn btn-primary" type="button"  ng-click="roleUpdate(employeeIds)">Update</button> | 
+	<a ui-sref="/AddAgent" class="btn btn-primary">+ Add Agent</a> | 
+	<button type="button" class="btn btn-success">Import From CSV <span class="glyphicon glyphicon-import"></span></button> |
+	<a href="#">Download Format <span class="glyphicon glyphicon-download-alt"></span></a>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <input type="text" class="form-control marginBottom5 search" placeholder="Search Agents" ng-model="searchAgents"/>
+	<table class="table dataTable">
+		<thead>
+			<tr>
+				<th>#</th>
+                <th> <input type="checkbox" name="" ng-model="selectAll" ng-click="checkAll()">Select </th>
+				<th>Name</th>
+                <th>Mobile</th>
+                <th>Role </th>
+                <th>Email Id</th>
+				<th>Reporting To</th>
+                <th>Firm Name</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in agents | filter:searchAgents track by $index">
+				<td>{{$index + 1}}</td>
+                <td><input type="checkbox" ng-click="toggleSelection(x.user_id)" name="" ng-model="selected"
+                           ng-checked="exist(x.user_id)" ></td>
+				<td>{{x.user_first_name}} {{x.user_middle_name}} {{x.user_last_name}}</td>
+                 <td>{{x.user_mobile_no}}</td>
+                <td>{{x.user_role_name}}</td>
+                <td>{{x.user_email_address}}</td>
+				<td>{{x.user_assingedto}}</td>
+				<td>{{x.Agents_firmname}}</td>
+                <td><span class="link" ng-click="agentDetail($index)">View</span></td>
+                <td><a ui-sref="/EditAgent({ agentID: {{x.Agents_User_Id}} })"><span class="link">Edit</span></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/ng-template" id="agentDetail.html">
+        <div class="modal-header">
+			<button type="button" class="close" ng-click="ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">{{agentDetail.user_first_name}} {{agentDetail.user_middle_name}} {{agentDetail.user_last_name}}</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+			<div class="subHeading">Contact Details</div>
+			<table class="leadDetail">
+				<tr>
+					<td>Email ID:</td>
+					<td>{{agentDetail.user_email_address}}</td>
+				</tr>
+				<tr>
+					<td>Mobile Number:</td>
+					<td>{{agentDetail.user_mobile_no}}</td>
+				</tr>
+				<tr ng-if="lead.user_dob !='0001-01-01T00:00:00'">
+					<td>Address:</td>
+					<td>{{agentDetail.Agents_add}}</td>
+				</tr>
+            </table>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Done</button>
+        </div>
+</script>
+<script type="text/ng-template" id="updateRoleId.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="ok()">&times;</button>
+        <h3 class="modal-title" id="modal-title">Update Role</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+    <form class="form-inline" name="form">
+        <div class="form-group">
+            <label class="control-label">Select Updation Type</label>
+             <select class="form-control" ng-click="selectUpdate()" ng-model="myModelFirst">
+                  <option value="" disabled selected>
+                      --Select--
+                  </option>
+                  <option ng-repeat= "x in updateTypeValues" value="{{x.value}}">{{x.name}}</option>
+             </select> 
+        </div>
+        <div class="form-group">
+            <label class="control-label">Select Option</label>
+             <select class="form-control" ng-model="myModel">
+                  <option value="" disabled selected>
+                      --Select--
+                  </option>
+                  <option ng-repeat= "x in firstDropValues" value="{{x.value}}">{{x.name}}</option>
+             </select> 
+        </div>
+
+    </form></div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="action()">Save</button>
+    </div>
+</script>

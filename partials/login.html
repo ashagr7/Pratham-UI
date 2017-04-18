@@ -1,0 +1,23 @@
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    <h3 class="h3">
+        User Login
+    </h3>
+    <form name="loginForm" class="form" method="POST" novalidate="novalidate">
+        <div>
+            <input type="text" name="emailId" ng-model="login.emailId" class="form-control" placeholder="Email ID*" ng-required="true" ng-class="{blankInput: loginForm.emailId.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div>
+            <input type="password" name="password" ng-model="login.password" ng-keypress="enterLogin($event,login,'loginForm')" class="form-control" placeholder="Password*" ng-required="true" ng-class="{blankInput: loginForm.password.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success" ng-click="login(login,'loginForm')">Login</button> | 
+            <a href="#">Forgot Password?</a>
+        </div>
+        <div class="text-center divStyle1">
+            New to Pratham?
+            <a ui-sref="/RegisterFirm">Register Your Firm</a>
+        </div>
+    </form>
+</div>
+<div class="col-md-4"></div>

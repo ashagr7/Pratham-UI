@@ -1,0 +1,54 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+	<ol class="breadcrumb">
+	  <li><a ui-sref="/">Home</a></li>      
+      <li class="active">{{pageTitle}}</li>
+	</ol>	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<form name="actionForm" class="form" method="POST" novalidate="novalidate">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="actionType">Action Type</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0 radioLabel">
+             <input type="radio"  name="actionType" id="actionTypeEmail" value="email" ng-model="action.actionType" ng-required="true" ng-class="{blankInput: actionForm.actionType.$error.required &amp;&amp; submit}"/>
+             <label for="actionTypeEmail">Email</label>
+             
+             <input type="radio"  name="actionType" id="actionTypeSms" value="sms" ng-model="action.actionType" ng-required="true" ng-class="{blankInput: actionForm.actionType.$error.required &amp;&amp; submit}"/>
+             <label for="actionTypeSms">SMS</label>
+             
+             <input type="radio"  name="actionType" id="actionTypeDesktop" value="desktop" ng-model="action.actionType" ng-required="true" ng-class="{blankInput: actionForm.actionType.$error.required &amp;&amp; submit}"/>
+             <label for="actionTypeDesktop">Desktop Notification</label>
+         </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="template">Template</label>
+         </div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding0">
+            <select class="form-control" name="template" id="template" ng-model="action.template" ng-required="true" ng-class="{blankInput: actionForm.template.$error.required &amp;&amp; submit}" ng-show="action.actionType == 'email'">
+                <option value="">Please Select</option>
+                <option value="temp1">Template 1</option>
+                <option value="temp2">Template 2</option>
+                <option value="temp3">Template 3</option>
+                <option value="temp4">Template 4</option>
+                <option value="temp5">Template 5</option>
+            </select>
+            <input type="text" class="form-control" placeholder="Write Content" name="textTemplate" id="textTemplate" ng-model="action.textTemplate" ng-required="true" ng-class="{blankInput: actionForm.textTemplate.$error.required &amp;&amp; submit}" ng-show="action.actionType != 'email'"/>
+         </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ng-show="action.template">
+            <button type="button" class="btn btn-default" ng-click="previewTemplate(action.template)">
+                <span class="glyphicon glyphicon-film"></span>
+            </button>
+        </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 marginTop10">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding0 text-center">
+         <button type="button" class="btn btn-success" ng-click="saveAction('actionForm',action)">Save Alert Rule</button>
+            </div>
+      </div>
+    </form>
+</div>

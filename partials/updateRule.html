@@ -1,0 +1,62 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a ui-sref="/">Home</a></li>
+	  <li><a ui-sref="/CreateNewRule">Create New Rule</a></li>
+      <li class="active">{{pageTitle}}</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <span>Which records you would like to apply rule on?</span>
+      <div class="marginTop10">
+         <input type="radio" name="recordsType" value="0" id="recordType1" ng-model="recordType"/>
+         <label for="recordType1">Records Matching the Condition</label> | 
+         <input type="radio" name="recordsType" value="1" id="recordType2" ng-model="recordType"/>
+         <label for="recordType2">All Records</label>
+      </div>
+      <div ng-show="recordType=='0'">
+         <table class="table alertRuleTable">
+            <tr>
+               <td>
+                  <select class="form-control" ng-model="rules[0].rulecriteria_modfield_id" ng-change="getFieldValues(rules[0].rulecriteria_modfield_id,0)">
+                     <option value="">Field</option>
+                     <option ng-repeat="x in subModules" value="{{x.modfieldid}}">{{x.modfield_name}}</option>
+                  </select>
+               </td>
+               <td>
+                  <select class="form-control" class="form-control" ng-model="rules[0].rulecriteria_condition" ng-disabled="disableOperator0">
+                      <option value="">Operator</option>
+                      <option value="=">=</option>
+                      <option value="<>">&#60;&#62;</option>
+                      <option value=">">&#62;</option>
+                      <option value="<">&#60;</option>
+                      <option value=">=">&#62;=</option>
+                      <option value="<=">&#60;</option>
+                  </select>
+               </td>
+               <td class="inputType">
+                  <input type="text" class="form-control" ng-show="showInput0" placeholder="Value" ng-model="rules[0].rulecriteria_criteria"/>
+                  <select ng-show="showDrodown0" class="form-control" ng-model="rules[0].rulecriteria_criteria">
+                     <option value="">Value</option>
+                     <option ng-repeat="x in fieldValues0" value="{{x.modfieldvalues_defdbvalue}}">{{x.modfieldvalues_value}}</option>
+                  </select>
+               </td>
+			   <td>
+                <select class="form-control" ng-model="rules[0].rule_criteria_operator">
+                   <option value="">Condition</option>                        
+                    <option value="and">AND</option>
+                    <option value="or">OR</option>
+                </select>
+			   </td>
+                <td>
+                    <button type="button" class="btn btn-default" ng-click="addRow(rules[0].rule_criteria_operator)">Add</button>
+                </td>
+            </tr>
+         </table>
+      </div>
+	  <div>
+		<button type="button" class="btn btn-success" ng-click="updateRule(rules)">Update</button>
+	  </div>
+</div>

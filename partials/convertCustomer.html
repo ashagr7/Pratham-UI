@@ -1,0 +1,307 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>Lead <span class="glyphicon glyphicon-chevron-right"></span> Customer</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a ui-sref="/Customers">Customers</a></li>
+      <li class="active">Convert Customer</li>
+   </ol>
+</div>
+<form name="addCustomerForm" class="form" method="POST" novalidate="novalidate">
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <div class="field">
+         <label ng-show="customer.firstName" class="show-hide">First Name *</label>
+         <input type="text" ng-disabled="true" placeholder="First Name*" title="First Name*" class="form-control" name="firstName" ng-model="customer.firstName" ng-required="true" ng-class="{blankInput: addCustomerForm.firstName.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.middleName" class="show-hide">Middle Name</label>
+         <input type="text" ng-disabled="true" placeholder="Middle Name" title="Middle Name"  class="form-control" name="middleName" ng-model="customer.middleName"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.lastName" class="show-hide">Last Name *</label>
+         <input type="text" ng-disabled="true" placeholder="Last Name*" title="Last Name*" class="form-control" name="lastName" ng-model="customer.lastName" ng-required="true" ng-class="{blankInput: addCustomerForm.lastName.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.mobileNumber" class="show-hide">Mobile Number *</label>
+         <input type="text" ng-disabled="true" placeholder="Mobile Number*" title="Mobile Number*" class="form-control" name="mobileNumber" ng-model="customer.mobileNumber" ng-required="true" ng-class="{blankInput: addCustomerForm.mobileNumber.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.officeNumber" class="show-hide">Office Number</label>
+         <input type="text" ng-disabled="true" placeholder="Office Number" title="Office Number" class="form-control" name="officeNumber" ng-model="customer.officeNumber"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.emailId" class="show-hide">Email ID*</label>
+         <input type="email" ng-disabled="true" placeholder="Email ID*" title="Email ID*" class="form-control" name="emailId" ng-model="customer.emailId" ng-required="true" ng-class="{blankInput: addCustomerForm.emailId.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.dob" class="show-hide">D.O.B. (YYYY-MM-DD)</label>
+         <input type="text" ng-disabled="true" placeholder="D.O.B. (YYYY-MM-DD)" title="D.O.B. (YYYY-MM-DD)" class="form-control"  name="dob" ng-model="customer.dob"/>
+      </div>
+      <div class="radioBtn">
+         <span>Gender:</span>
+         <input type="radio" name="gender" ng-disabled="true" ng-model="customer.gender" id="male" value="0"/>
+         <label for="male">Male</label> <span>|</span>
+         <input type="radio" name="gender" ng-disabled="true" ng-model="customer.gender" id="female" value="1"/>
+         <label for="female">Female</label>
+      </div>
+      <div class="field">
+         <label ng-show="customer.country" class="show-hide">Select Country</label>
+         <select class="form-control" ng-disabled="true" name="country" ng-model="customer.country" title="Country">
+            <option value="">
+               Country
+            </option>
+            <option value="india">
+               India
+            </option>
+         </select>
+      </div>
+      <div class="field">
+         <label ng-show="customer.state" class="show-hide">Select State</label>
+         <select class="form-control" name="state" ng-disabled="true" ng-model="customer.state" title="State">
+            <option value="">
+               State
+            </option>
+            <option value="1">
+               Delhi
+            </option>
+         </select>
+      </div>
+      <div class="field">
+         <label ng-show="customer.city" class="show-hide">Select City</label>
+         <select class="form-control" name="city" ng-disabled="true" ng-model="customer.city" title="City">
+            <option value="">
+               City
+            </option>
+            <option value="1">
+               New Delhi
+            </option>
+         </select>
+      </div>
+      <div class="field">
+         <label ng-show="customer.address" class="show-hide">Address</label>
+         <input type="text" placeholder="Address" ng-disabled="true" title="Address" class="form-control" name="address" ng-model="customer.address"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.zip" class="show-hide">ZIP Code</label>
+         <input type="text" placeholder="ZIP Code" ng-disabled="true" title="ZIP Code" class="form-control"  name="zip" ng-model="customer.zip"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.relationType" class="show-hide">Select Relation Type</label>
+         <select name="relationType" class="form-control"  name="relationType" ng-model="customer.relationType" title="Relation Type">
+            <option value="">
+               Relation Type
+            </option>
+            <option value="1">
+               S/O
+            </option>
+            <option value="2">
+               D/O
+            </option>
+            <option value="3">
+               W/O
+            </option>
+         </select>
+      </div>
+      <div class="field">
+         <label ng-show="customer.relationType" class="show-hide">Select Relation Name</label>
+         <input type="text" placeholder="Relation Name" ng-disabled="customer.relationType==undefined || customer.relationType==''" title="Relation Name" class="form-control"  name="relationName" ng-model="customer.relationName" ng-required="customer.relationType!=undefined && customer.relationType!=''" ng-class="{blankInput: addCustomerForm.relationName.$error.required &amp;&amp; submit}"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.residentType" class="show-hide">Select Resident Type</label>
+         <select name="residentType" class="form-control" name="residentType" ng-model="customer.residentType" title="Resident Type">
+            <option value="">
+               Resident Type
+            </option>
+            <option value="1">
+               Resident
+            </option>
+            <option value="2">
+               NRI
+            </option>
+            <option value="3">
+               PIO
+            </option>
+            <option value="4">
+               Other
+            </option>
+         </select>
+      </div>
+      <div class="field">
+         <label ng-show="customer.address2" class="show-hide">Address</label>
+         <input type="text" placeholder="Address" title="Address" ng-disabled="customer.residentType==undefined || customer.residentType==''" ng-required="customer.residentType!=undefined && customer.residentType!=''" ng-class="{blankInput: addCustomerForm.address2.$error.required &amp;&amp; submit}" class="form-control"  name="address2" ng-model="customer.address2"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.pan" class="show-hide">Pan</label>
+         <input type="text" ng-disabled="customer.residentType==undefined || customer.residentType==''" ng-required="customer.residentType!=undefined && customer.residentType!=''" ng-class="{blankInput: addCustomerForm.pan.$error.required &amp;&amp; submit}" placeholder="PAN" title="PAN" class="form-control"  name="pan" ng-model="customer.pan"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.aadhar" class="show-hide">Aadhar</label>
+         <input type="text" ng-disabled="customer.residentType==undefined || customer.residentType==''" ng-required="customer.residentType!=undefined && customer.residentType!=''" ng-class="{blankInput: addCustomerForm.aadhar.$error.required &amp;&amp; submit}" placeholder="AADHAR" title="AADHAR" class="form-control"  name="aadhar" ng-model="customer.aadhar"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.alternateContact" class="show-hide">Alternate Contact</label>
+         <input type="text" ng-disabled="customer.residentType==undefined || customer.residentType==''" ng-required="customer.residentType!=undefined && customer.residentType!=''" ng-class="{blankInput: addCustomerForm.alternateContact.$error.required &amp;&amp; submit}" placeholder="Alternate Contact No." title="Alternate Contact No." class="form-control"  name="alternateContact" ng-model="customer.alternateContact"/>
+      </div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <div class="field">
+         <label ng-show="customer.qualification" class="show-hide">Qualification</label>
+         <input type="text" placeholder="Qualification" title="Qualification" class="form-control"  name="qualification" ng-model="customer.qualification"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.profession" class="show-hide">Profession</label>
+         <input type="text" placeholder="Profession" title="Profession"  class="form-control"  name="profession" ng-model="customer.profession"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.company" class="show-hide">Company</label>
+         <input type="text" placeholder="Company" title="Company" class="form-control"  name="company" ng-model="customer.company"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.designation" class="show-hide">Designation</label>
+         <input type="text" placeholder="Designation" title="Designation" class="form-control"  name="designation" ng-model="customer.designation"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.officeAddress" class="show-hide">Office Address</label>
+         <input type="text" placeholder="Office Address" title="Office Address" class="form-control"  name="officeAddress" ng-model="customer.officeAddress"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.officeEmailId" class="show-hide">Office Email ID</label>
+         <input type="text" placeholder="Office Email ID" title="Office Email ID" class="form-control"  name="officeEmailId" ng-model="customer.officeEmailId"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.spouseName" class="show-hide">Spouse Name</label>
+         <input type="text" placeholder="Spouse Name" title="Spouse Name" class="form-control"  name="spouseName" ng-model="customer.spouseName"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.spouseDob" class="show-hide">Spouse Dob</label>
+         <input type="text" placeholder="Spouse Dob" title="Spouse Dob" class="form-control"  name="spouseDob" ng-model="customer.spouseDob"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.spousePan" class="show-hide">Spouse Pan</label>
+         <input type="text" placeholder="PAN" title="PAN" class="form-control"  name="spousePan" ng-model="customer.spousePan"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.spouseAadhar" class="show-hide">Spouse Aadhar</label>
+         <input type="text" placeholder="AADHAR" value="" title="AADHAR" class="form-control"  name="spouseAadhar" ng-model="customer.spouseAadhar"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.weddingAnniversary" class="show-hide">Wedding Anniversary</label>
+         <input type="text" placeholder="Wedding Anniversary" title="Wedding Anniversary" class="form-control"  name="weddingAnniversary" ng-model="customer.weddingAnniversary"/>
+      </div>
+      <div class="field">
+         <label ng-show="customer.childrenNo" class="show-hide">No. of Children</label>
+         <select class="form-control" name="childrenNo" ng-model="customer.childrenNo" title="No. of Children" ng-change="appendFields()">
+            <option value="">
+               No. of Children
+            </option>
+            <option value="1">
+               1
+            </option>
+            <option value="2">
+               2
+            </option>
+            <option value="3">
+               3
+            </option>
+            <option value="4">
+               4
+            </option>
+         </select>
+      </div>
+      <div id="children"></div>
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <div class="radioBtn">
+         <span>Bank Loan:</span>
+         <input type="radio" name="bankloan" ng-model="customer.bankloan" id="yes" value="1"/>
+         <label for="yes">Yes</label>
+         <span>|</span>
+         <input type="radio" name="bankloan" ng-model="customer.bankloan" id="no" value="0"/>
+         <label for="no">No</label>
+      </div>
+      <div ng-show="customer.bankloan == 1">
+         <div class="field">
+            <label ng-show="customer.bankName" class="show-hide">Bank Name</label>
+            <input type="text" placeholder="Bank Name" title="Bank Name" class="form-control"  name="bankName" ng-model="customer.bankName"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.accountNumber" class="show-hide">Account Number</label>
+            <input type="text" placeholder="Account Number" title="Account Number" class="form-control"  name="accountNumber" ng-model="customer.accountNumber"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.ifscCode" class="show-hide">IFSC Code</label>
+            <input type="text" placeholder="IFSC Code" title="IFSC Code" class="form-control"  name="ifscCode" ng-model="customer.ifscCode"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.bankAdress" class="show-hide">Address</label>
+            <input type="text" placeholder="Address" title="Address" class="form-control"  name="bankAdress" ng-model="customer.bankAdress"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.bankEmailId" class="show-hide">Bank Email ID</label>
+            <input type="text" placeholder="Bank Email ID" title="Bank Email ID" class="form-control"  name="bankEmailId" ng-model="customer.bankEmailId"/>
+         </div>
+      </div>
+      <div class="radioBtn">
+         <span>GPA Holder:</span>
+         <input type="radio" name="gpaHolder" ng-model="customer.gpaHolder" id="gpaHolderyes" value="1"/>
+         <label for="gpaHolderyes">Yes</label>
+         <span>|</span>
+         <input type="radio" name="gpaHolder" ng-model="customer.gpaHolder" id="gpaHolderno" value="0"/>
+         <label for="gpaHolderno">No</label>
+      </div>
+      <div ng-show="customer.gpaHolder == 1">
+         <div class="field">
+            <label ng-show="customer.gpaRelation" class="show-hide">Gpa Relation Type</label>
+            <select name="gpaRelation" class="form-control" name="gpaRelation" ng-model="customer.gpaRelation" title="Relation Type">
+               <option value="">
+                  Relation Type
+               </option>
+               <option value="1">
+                  S/O
+               </option>
+               <option value="2">
+                  D/O
+               </option>
+               <option value="3">
+                  W/O
+               </option>
+            </select>
+         </div>
+         <div class="field">
+            <label ng-show="customer.gpaName" class="show-hide">GPA Name</label>
+            <input type="text" placeholder="GPA Name" title="GPA Name" class="form-control"  name="gpaName" ng-model="customer.gpaName"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.gpaDob" class="show-hide">GPA D.O.B. (YYYY-MM-DD)</label>
+            <input type="text"  placeholder="GPA D.O.B. (YYYY-MM-DD)" title="D.O.B. (YYYY-MM-DD)" class="form-control"  name="gpaDob" ng-model="customer.gpaDob"/>
+         </div>
+         <div class="field">
+             <label ng-show="customer.gpaAddress" class="show-hide">Address</label>
+            <input type="text" placeholder="Address" title="Address" class="form-control"  name="gpaAddress" ng-model="customer.gpaAddress"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.permanentAddress" class="show-hide">Permanent Address</label>
+            <input type="text" placeholder="Permanent Address" title="Permanent Address" class="form-control"  name="permanentAddress" ng-model="customer.permanentAddress"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.relationWithcustomer" class="show-hide">Relation with customer</label>
+            <input type="text" placeholder="Relation with customer" title="Relation with customer" class="form-control"  name="relationWithcustomer" ng-model="customer.relationWithcustomer"/>
+         </div>
+         <div class="field">
+            <label ng-show="customer.gpaPan" class="show-hide">PAN</label>
+            <input type="text" placeholder="PAN" title="PAN" class="form-control"  name="gpaPan" ng-model="customer.gpaPan"/>
+         </div>
+         <div class="field">
+             <label ng-show="customer.gpaAadhar" class="show-hide">Gpa Aadhar</label>
+            <input type="text" placeholder="AADHAR" title="AADHAR" class="form-control"  name="gpaAadhar" ng-model="customer.gpaAadhar"/>
+         </div>
+      </div>
+      <div class="text-center marginTop20" ng-show="action == 'addCustomer'">
+         <button type="button" class="btn btn-success width100" ng-click="addCustomer(customer,'addCustomerForm')">+ Add Customer</button>
+      </div>
+      <div class="text-center marginTop20" ng-show="action == 'editCustomer'">
+         <button type="button" class="btn btn-success width100" ng-click="updateCustomer(customer,'addCustomerForm')">+ Update Customer</button>
+      </div>
+   </div>
+</form>

@@ -1,0 +1,55 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<h1>Phases / Prospective</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<ol class="breadcrumb">
+	  <li><a ui-sref="/">Home</a></li>
+	  <li class="active">Phases</li>
+	</ol>	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+	<a ng-click="addPhase(phases, 'phasesForm')" class="btn btn-primary">+ Add Phase</a>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <form name="phasesForm" class="form" method="POST" novalidate="novalidate">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+                <label for="type">Project Name</label>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <select ng-model="phases.projectName" name="projectName" class="form-control" autofocus="true" ng-change="getPhases(phases.projectName)" ng-required="true" ng-class="{blankInput: phasesForm.projectName.$error.required &amp;&amp; submit}">
+                    <option value="">
+                        Project
+                    </option>
+                    <option ng-repeat="x in projectList" value="{{x.ProjId}}">
+                        {{x.Proj_Name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </form>
+	<table class="table dataTable" ng-show="phases.projectName > 0">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Phase</th>
+				<th>Location</th>
+				<th>Type</th>
+<!--				<th>Release</th>-->
+				<th>No. Of Blocks</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in phaseList track by $index">
+				<td>{{$index + 1}}</td>
+				<td>{{x.Phase_Name}}</td>
+				<td>{{x.Phase_Location}}</td>
+				<td>{{typeNames[x.Phase_UnitType.UnitType_Id - 1]}}</td>
+<!--				<td></td>-->
+				<td>{{x.Phase_NoofBlocks}}</td>
+				<td><a><span class="link" ui-sref="/EditPhases({ projId: {{phases.projectName}}, phaseId: {{x.Phase_Id}} })" ui-sref="/EditPhases">Edit</span></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

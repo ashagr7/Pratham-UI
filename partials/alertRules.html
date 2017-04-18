@@ -1,0 +1,35 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+       <li><a ui-sref="/">Home</a></li>      
+      	<li class="active">Alert Rules</li>
+	   <li class="active">{{pageTitle}}</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+	<a ui-sref="/CreateNewRule" class="btn btn-primary">+ Create New Rule</a>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<table class="table dataTable">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Rule Name</th>
+				<th>Rule Description</th>
+				<th>Module Name</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in alertRules | filter:searchLead track by $index">
+				<td>{{$index + 1}}</td>
+				<td>{{x.rule_name}}</td>
+				<td>{{x.rule_description}}</td>
+				<td>{{x.rule_modname}}</td>
+				<td>{{x.rule_actname}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

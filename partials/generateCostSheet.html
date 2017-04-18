@@ -1,0 +1,90 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>{{title}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">{{title}}</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+	<button type="button" class="btn btn-primary" ng-click="generateCostSheetUnits(blockCostSheetId)">Generate Cost Sheet for All Units</button>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginTop20" ng-show="showGrid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Unit No</th>
+                <th>Unit Name</th>
+                <th>Unit Type</th>
+                <th>Unit Floor</th>
+                <th>Premium</th>
+                <th>Super Built-up Area</th>
+                <th>Direction</th>
+                <th>Final APPS</th>
+                <th>Total Cost</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in unitsWCost">
+                <td>{{x.UnitDtls_No}}</td>
+                <td>{{x.UnitDtls_Name}}</td>
+                <td>{{x.UnitDtls_Type}}</td>
+                <td>{{x.UnitDtls_Floor}}</td>
+                <td>{{x.UnitDtls_Premium}}</td>
+                <td>{{x.UnitDtls_BuliltupArea}}</td>
+                <td>{{x.UnitDtls_Directn}}</td>
+                <td>{{x.unitcostcal_finalbasecost}}</td>
+                <td>{{x.unitcostcal_totcost}}</td>
+                <td>
+                    <span class="link" ng-click="unitCostSheetModal(x.UnitDtls_Id)">
+                        View Details
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/ng-template" id="unitCostSheet.html">
+        <div class="modal-header">
+			<button type="button" class="close" ng-click="ok()">&times;</button>
+            <h3 class="modal-title" id="modal-title">Unit Cost Sheet Details - {{unitId}}</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <table class="">
+				<tr>
+					<td>Flat No.</td>
+					<td>{{unitCostSheetDetail.UnitDtls_No}}</td>
+				</tr>
+				<tr>
+					<td>Type</td>
+					<td>{{unitCostSheetDetail.UnitDtls_Name}}</td>
+				</tr>
+				<tr>
+					<td>SBA</td>
+					<td>{{unitCostSheetDetail.sba}}</td>
+				</tr>
+				<tr>
+					<td>Actual Price / Sq. Ft.</td>
+					<td>{{unitCostSheetDetail.UnitDtls_No}}</td>
+				</tr>
+				<tr>
+					<td>Floor Rise Charges (If any)</td>
+					<td>{{unitCostSheetDetail.UnitDtls_No}}</td>
+				</tr>
+				<tr>
+					<td>Discount Price / Sq. Ft.</td>
+					<td>{{unitCostSheetDetail.UnitDtls_No}}</td>
+				</tr>
+				<tr>
+					<td>Basic Cost</td>
+					<td>{{unitCostSheetDetail.UnitDtls_No}}</td>
+				</tr>
+			</table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Done</button>
+        </div>
+    </script>

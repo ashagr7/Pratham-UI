@@ -1,0 +1,36 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>Projects</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">Projects</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right ctaContainer">
+	<a ui-sref="/AddProject" class="btn btn-primary">+ Add Project</a>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <table class="table borderDef">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Project</th>
+                <th>Location</th>
+                <th class="text-center">Phases</th>
+                <th class="text-center">Types</th>
+				<th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+			<tr ng-repeat="x in projectsList | filter:searchProjects track by $index">
+				<td>{{$index + 1}}</td>
+				<td>{{x.Proj_Name}}</td>
+				<td>{{x.Proj_Location}}</td>
+				<td class="text-center">{{x.Proj_Phases}}</td>
+				<td class="text-center">{{x.Proj_Types}}</td>
+                <td><a ui-sref="/EditProject({ projId: {{x.ProjId}} })"><span class="link">Edit</span></a></td>
+			</tr>
+        </tbody>
+    </table>
+</div>

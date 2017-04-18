@@ -1,0 +1,185 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a ui-sref="/">Home</a></li>
+      <li><a ui-sref="/Leads">Leads</a></li>
+      <li class="active">{{pageTitle}}</li>
+   </ol>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center marginBottom30">
+   <div class="steps">
+      <div class="step done">Contact Details</div>
+      <div class="seperator"></div>
+      <div class="step active">Projects</div>
+      <div class="seperator"></div>
+      <div class="step blank">Costing</div>
+      <div class="seperator"></div>
+      <div class="step blank">Payment</div>
+   </div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs"></div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+   <form name="addLeadForm" class="form" method="POST" novalidate="novalidate">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">First Name</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="First Name*" class="form-control" name="firstName" ng-model="addLead.firstName" ng-required="true" ng-class="{blankInput: addLeadForm.firstName.$error.required &amp;&amp; submit}"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Middle Name</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="Middle Name" class="form-control" name="middleName" ng-model="addLead.middleName"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Last Name</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="Last Name*" class="form-control" name="lastName" ng-model="addLead.lastName" ng-required="true" ng-class="{blankInput: addLeadForm.lastName.$error.required &amp;&amp; submit}"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Mobile Number</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="Mobile Number*" class="form-control" name="mobileNumber" ng-model="addLead.mobileNumber" ng-required="true" ng-class="{blankInput: addLeadForm.mobileNumber.$error.required &amp;&amp; submit}"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Office Number</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="Office Number" class="form-control" name="officeNumber" ng-model="addLead.officeNumber"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Email ID</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="email" placeholder="Email ID*" class="form-control" name="emailId" ng-model="addLead.emailId" ng-required="true" ng-class="{blankInput: addLeadForm.emailId.$error.required &amp;&amp; submit}"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">D.O.B</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="D.O.B. (YYYY-MM-DD)" class="form-control"  name="dob" ng-model="addLead.dob"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Gender</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0 radioBtn" ng-class="{blankInput: addLeadForm.gender.$error.required &amp;&amp; submit}">
+            <input type="radio" name="gender" ng-model="addLead.gender" ng-required="true" id="male" value="0"/>
+            <label for="male">Male</label> <span>|</span>
+            <input type="radio" name="gender" ng-model="addLead.gender" ng-required="true" id="female" value="1"/>
+            <label for="female">Female</label>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Country</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <select class="form-control" name="country" ng-model="addLead.country">
+               <option value="">
+                  Country
+               </option>
+               <option value="india">
+                  India
+               </option>
+            </select>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">State</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <select class="form-control" name="state" ng-model="addLead.state">
+               <option value="">
+                  State
+               </option>
+               <option value="1">
+                  Delhi
+               </option>
+            </select>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">City</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <select class="form-control" name="city" ng-model="addLead.city">
+               <option value="">
+                  City
+               </option>
+               <option value="1">
+                  New Delhi
+               </option>
+            </select>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Address</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="Address" class="form-control"  name="address" ng-model="addLead.address"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Zip Code</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="ZIP Code" class="form-control"  name="zip" ng-model="addLead.zip"/>
+         </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Lead Code</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+            <input type="text" placeholder="Lead Code" class="form-control"  name="leadCode" ng-model="addLead.leadCode"/>
+         </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="projectName">Lead Source</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+             <select class="form-control" name="leadSource" ng-model="addLead.leadSource">
+               <option value="" disabled selected>
+                  Select Lead Source
+               </option>
+               <option ng-repeat= "x in lead_source_list" value="{{x.lead_source_id}}">
+                  {{x.lead_source_name}}
+               </option>
+            </select>
+         </div>
+      </div>
+      <div class="text-center" ng-show="addLeadBtn">
+         <button type="button" class="btn btn-success" ng-click="addLead(addLead,'addLeadForm')">+ Add Lead</button>
+      </div>
+      <div class="text-center" ng-show="editLeadBtn">
+         <button type="button" class="btn btn-success" ng-click="updateLead(addLead,'addLeadForm')">Update Lead</button>
+      </div>
+   </form>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs"></div>

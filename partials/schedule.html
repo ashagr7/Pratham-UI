@@ -1,0 +1,104 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+	<ol class="breadcrumb">
+	  <li><a ui-sref="/">Home</a></li>      
+      <li class="active">{{pageTitle}}</li>
+	</ol>	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<form name="scheduleAlertForm" class="form" method="POST" novalidate="novalidate">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="execStartDate">Execution Start Date</label>
+         </div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding0">
+            <datepicker date-format="yyyy-MM-dd" selector="form-control">
+            <div class="input-group">
+              <input class="form-control" placeholder="Execution Start Date" name="execStartDate" ng-model="template.execStartDate" ng-required="true" ng-class="{blankInput: scheduleAlertForm.execStartDate.$error.required &amp;&amp; submit}"/> 
+              <span class="input-group-addon">
+                  <a href="javascript:void(0);" ><i class="fa fa-lg fa-calendar"></i></a>
+              </span>
+            </div>
+          </datepicker>
+         </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="execEndDate">Execution End Date</label>
+         </div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding0">
+            <datepicker date-format="yyyy-MM-dd" selector="form-control">
+            <div class="input-group">
+              <input class="form-control" placeholder="Execution End Date" name="execEndDate" ng-model="template.execEndDate" ng-required="true" ng-class="{blankInput: scheduleAlertForm.execEndDate.$error.required &amp;&amp; submit}"/> 
+              <span class="input-group-addon">
+                  <a href="javascript:void(0);" ><i class="fa fa-lg fa-calendar"></i></a>
+              </span>
+            </div>
+          </datepicker>
+         </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="execTime">Execution Time</label>
+         </div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding0">
+            <select class="form-control" name="execTime" id="execTime" ng-model="scheduleAlert.execTime" ng-required="true" ng-class="{blankInput: scheduleAlertForm.execTime.$error.required &amp;&amp; submit}">
+                <option value="">Execution Time</option>
+                <option value="0000">12:00 AM</option>
+                <option value="1200">12:00 PM</option>
+                <option value="2300">23:00 PM</option>
+            </select>
+         </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="frequency">Frequency</label>
+         </div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding0">
+            <select class="form-control" name="frequency" id="frequency" ng-model="scheduleAlert.frequency" ng-required="true" ng-class="{blankInput: scheduleAlertForm.frequency.$error.required &amp;&amp; submit}">
+                <option value="">Please Select</option>
+                <option value="">Once</option>
+                <option value="">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="">Yearly</option>
+            </select>
+         </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" ng-show="scheduleAlert.frequency == 'weekly'">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="weekDay">Week Day</label>
+         </div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding0">
+            <select class="form-control" name="weekDay" id="weekDay" ng-model="scheduleAlert.weekDay" ng-required="true" ng-class="{blankInput: scheduleAlertForm.weekDay.$error.required &amp;&amp; submit}">
+                <option value="">Please Select</option>
+                <option value="">Monday</option>
+                <option value="">Tuesday</option>
+                <option value="">Wednesday</option>
+                <option value="">Thursday</option>
+                <option value="">Friday</option>
+                <option value="">Saturday</option>
+                <option value="">Sunday</option>
+            </select>
+         </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" ng-show="scheduleAlert.frequency == 'monthly'">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="monthDate">Month Date</label>
+         </div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padding0">
+            <select class="form-control" name="monthDate" id="monthDate" ng-model="scheduleAlert.monthDate" ng-required="true" ng-class="{blankInput: scheduleAlertForm.monthDate.$error.required &amp;&amp; submit}">
+                <option value="">Please Select</option>
+                <option ng-repeat="x in monthDates" value="{{x}}">{{x}}</option>
+            </select>
+         </div>
+      </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 marginTop10">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding0 text-center">
+         <button type="button" class="btn btn-success" ng-click="saveSchedule()">Save Alert Rule</button>
+            </div>
+      </div>
+    </form>
+</div>

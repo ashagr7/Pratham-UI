@@ -1,0 +1,33 @@
+<div class="col-md-3"></div>
+<div class="col-md-6">
+    <h3 class="h3">
+        Admin User Creation
+    </h3>
+    <form name="adminCreationForm" class="form" method="POST" novalidate="novalidate">
+        <div>
+            <input type="text" name="adminFirstName" ng-model="adminCreation.adminFirstName" class="form-control" placeholder="Admin First Name*" ng-required="true" ng-class="{blankInput: adminCreationForm.adminFirstName.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div>
+            <input type="text" name="adminMiddleName" ng-model="adminCreation.adminMiddleName" class="form-control" placeholder="Admin Middle Name"/>
+        </div>
+        <div>
+            <input type="text" name="adminLastName" ng-model="adminCreation.adminLastName" class="form-control" placeholder="Admin Last Name*" ng-required="true" ng-class="{blankInput: adminCreationForm.adminLastName.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div>
+            <input type="text" name="adminMobileNo" ng-model="adminCreation.adminMobileNo" class="form-control" placeholder="Admin Mobile Number*" ng-required="true" ng-class="{blankInput: adminCreationForm.adminMobileNo.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div>
+            <input type="text" name="adminEmailId" ng-model="adminCreation.adminEmailId" class="form-control" placeholder="Admin Email ID*" ng-required="true" ng-class="{blankInput: adminCreationForm.adminEmailId.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div>
+            <input type="password" name="password" ng-model="adminCreation.password" class="form-control" placeholder="Password*" ng-required="true" ng-class="{blankInput: adminCreationForm.password.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div>
+            <input type="password" name="cPassword" ng-model="adminCreation.cPassword" class="form-control" placeholder="Confirm Password*" ng-required="true" ng-class="{blankInput: adminCreationForm.cPassword.$error.required &amp;&amp; submit}"/>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success" ng-click="createAdminUser(adminCreation,'adminCreationForm')">Submit</button>
+        </div>
+    </form>
+</div>
+<div class="col-md-3"></div>

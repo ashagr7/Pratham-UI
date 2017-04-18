@@ -1,0 +1,90 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle ng-scope">
+   <h1>Payment Schedule</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a>Scope</a></li>
+      <li class="active">Payment Schedule</li>
+   </ol>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 marginBottom20">
+   <form class="form">
+      <div>
+         <select ng-model="projectDetails.projectName" name="projectName" class="form-control" ng-change="phaseListFun(projectDetails.projectName)" autofocus="true">
+            <option value="">
+               Project
+            </option>
+            <option ng-repeat="x in projectList" value="{{x.ProjId}}">
+               {{x.Proj_Name}}
+            </option>
+         </select>
+      </div>
+      <div>
+         <select ng-model="projectDetails.phase" name="phase" class="form-control" ng-change="blockListFun(projectDetails.phase)">
+            <option value="">
+               Phase
+            </option>
+            <option ng-repeat="x in phaseList" value="{{x.Phase_Id}}">
+               {{x.Phase_Name}}
+            </option>
+         </select>
+      </div>
+      <div class="divLabel">
+         Type: <strong ng-model="projectDetails.flatType">{{flatType}}</strong>
+      </div>
+      <div>
+         <select ng-model="projectDetails.blocks" name="blocks" class="form-control" ng-change="getPaymentScheduleList(projectDetails.blocks)">
+            <option value="">
+               Block
+            </option>
+            <option ng-repeat="x in blockList" value="{{x.Blocks_Id}}">
+               {{x.Blocks_Name}}
+            </option>
+         </select>
+      </div>
+   </form>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center marginTop20"></div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <table class="table dataTable">
+      <thead>
+         <tr>
+            <th>#</th>
+            <th>Block Stage Name</th>
+            <th>Payment Schedule Value</th>
+            <th>Action</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr ng-repeat="x in paymentScheduleList track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{x.blockstageName}}</td>
+            <td>{{x.PaymentScheduleCalcValue}}</td>
+            <td><a ng-click="editPaymentSchedule(x)"><span class="link">Edit</span></a></td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+<script type="text/ng-template" id="paymentScheduleChange.html">
+   <div class="modal-header">
+      <button type="button" class="close" ng-click="ok()">&times;</button>
+      <h3 class="modal-title" id="modal-title">Add Payment Schedule</h3>
+   </div>
+   <div class="modal-body" id="modal-body">
+      <div class="subHeading">Add Payment Schedule</div>
+       <form name="blockStageForm" class="form" method="POST" novalidate="novalidate">
+          <table class="leadDetail">
+              <tr>
+                <td>Payment Schedule Value:</td>
+                <td>        
+                    <input type="text" name="paymentScheduleValue" class="form-control" ng-model="blockStage.paymentScheduleValue" placeholder="Payment Schedule Value" ng-required="true" ng-class="{blankInput: blockStageForm.paymentScheduleValue.$error.required &amp;&amp; submit}" />
+                </td>
+             </tr>
+          </table>
+       </form>
+       </div>
+       <div class="modal-footer">
+          <button class="btn btn-primary" type="button" ng-click="updatePaymentSchedule(blockStage, 'blockStageForm')">Edit Payment Schedule</button>
+       </div>
+</script>

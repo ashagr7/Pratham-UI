@@ -1,0 +1,24 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+	<h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+	<ol class="breadcrumb">
+	  <li><a ui-sref="/">Home</a></li>      
+      <li class="active">{{pageTitle}}</li>
+	</ol>	
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<form name="emailRecipientForm" class="form" method="POST" novalidate="novalidate">
+       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+            <label for="execStartDate">Additional Email Recipient</label>
+         </div>
+         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padding0">
+			 <textarea name="emails" ng-model="emailRecipient.emails" class="form-control" ng-required="true" placeholder="Enter email seperated by ','" autofocus></textarea>
+         </div>
+       </div>
+	   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 marginTop10 text-center">
+			<button type="button" class="btn btn-primary" ng-click="saveEmailRecipient('emailRecipientForm', emailRecipient)">Save &amp; Next</button>
+	   </div>
+	</form>
+</div>

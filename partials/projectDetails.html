@@ -1,0 +1,81 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+		<h1>Add Prospect Project Details</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+	<ol class="breadcrumb">
+	  <li><a href="#">Home</a></li>
+	  <li><a ui-sref="/Prospects">Prospects</a></li>
+	  <li class="active">Add Prospects Project Details</li>
+	</ol>	
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">    
+	<form class="form">
+	<div>
+			<select ng-model="projectDetails.projectName" name="projectName" class="form-control" ng-change="phaseListFun(projectDetails.projectName)" autofocus="true">
+                <option value="">
+                    Project
+                </option>
+				<option ng-repeat="x in projectList" value="{{x.ProjId}}">
+					{{x.Proj_Name}}
+				</option>
+			</select>
+		</div>
+		<div>
+			<select ng-model="projectDetails.phase" name="phase" class="form-control" ng-change="blockListFun(projectDetails.phase)">
+                <option value="">
+                    Phase
+                </option>
+				<option ng-repeat="x in phaseList" value="{{x.Phase_Id}}">
+					{{x.Phase_Name}}
+				</option>
+			</select>
+		</div>
+		<div class="divLabel">
+			Type: <strong ng-model="projectDetails.flatType">{{flatType}}</strong>
+		</div>
+		<div>
+			<select ng-model="projectDetails.blocks" name="blocks" class="form-control" ng-change="getUnits(projectDetails.blocks)">
+                <option value="">
+                    Block
+                </option>
+				<option ng-repeat="x in blockList" value="{{x.Blocks_Id}}">
+					{{x.Blocks_Name}}
+				</option>
+			</select>
+		</div>
+		<div>
+			<table class="table borderDef">
+				<thead>
+					<tr>
+						<th>Project</th>
+                        <th>Phase</th>
+                        <th>Type</th>
+                        <th>Unit</th>
+						<th>Size</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="projectList">
+					<tr ng-repeat="x in leadProjects track by $index" id="{{x.UnitDtls_Id}}" class="ng-scope">
+                        <td>{{x.Proj_Name}}</td>
+                        <td>{{x.Phase_Name}}</td>
+                        <td>{{getTypeNameById(x.Phase_UnitType_Id)}}</td>
+                        <td><div class="dispNone">
+						{"ProjId":{{x.ProjId}},"Phase_Id":{{x.Phase_Id}},"Blocks_Id":{{x.Blocks_Id}},"UnitDtls_Id":{{x.UnitDtls_Id}}}</div>{{x.UnitDtls_Name}} - {{x.UnitDtls_No}} - {{x.UnitDtls_Floor}} Floor</td>
+                        <td>{{x.UnitDtls_Msrmnt}} sq ft</td>
+                        <td><span class="glyphicon glyphicon-trash delete" ng-click="deleteRow(x.ProjDtl_Id,x.UnitDtls_Id)"></span></td></tr>
+				</tbody>
+			</table>
+		</div>
+		</form>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
+    <div ng-repeat="floor in perFloorUnits track by $index" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="floorName">Floor: <strong>{{perFloorUnits.length-1 - $index}}</strong></div>
+        <div ng-repeat="x in floor track by $index" class="flat {{flatStatus[x.UnitDtls_Status-1]}} {{x.markUp}}" id="unit{{x.UnitDtls_Id}}" ng-click="selectUnit(x.UnitDtls_Id,projectDetails)" title="{{x.UnitDtls_BRoom}} BHK - {{x.UnitDtls_No}} - {{x.UnitDtls_Floor}} Floor | {{flatStatusText[x.UnitDtls_Status-1]}}">
+	    </div>
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center marginTop20">
+	<button type="button" class="btn btn-primary" ng-click="saveLead(projectDetails)">Save Changes</button>
+</div>

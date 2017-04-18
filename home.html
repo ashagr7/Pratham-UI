@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html ng-app = "pratham" ng-controller="mainCtrl">
+   <head>
+      <meta charset="UTF-8">
+      <title>{{title}}</title>
+      <link rel="icon" type="image/x-icon" href="assets/img/logo.png"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+      <!-- Scripts -->
+      <script src="app/libs/others/jquery-3.1.1.min.js"></script>
+      <script src="app/libs/others/bootstrap.js"></script>
+      <script src="app/libs/others/jquery.orgchart_sutlej.js"></script>
+      <script src="app/libs/others/summernote.js"></script>
+      <script src="app/libs/angular/angular.min.js"></script>
+      <script src="app/libs/angular/angular-ui-router.min.js"></script>
+      <script src="app/libs/angular/ui-bootstrap-tpls-2.3.1.min.js"></script>
+      <script src="app/libs/angular/angular-cookies.js"></script>
+      <script src="app/libs/angular/angular-datepicker.js"></script>
+      <script src="app/libs/angular/angular-animate.js"></script>
+      <script src="app/js/custom-jquery.js"></script>
+      <script src="app/app.js"></script>
+      <script src="app/app-routes.js"></script>
+      <script src="app/services/http-service.js"></script>
+      <script src="app/controllers/main.js"></script>
+      <script src="app/controllers/access-rights.js"></script>
+      <script src="app/controllers/add-department.js"></script>
+      <script src="app/controllers/agents.js"></script>
+      <script src="app/controllers/alert-rules.js"></script>
+      <script src="app/controllers/apply-cost-sheet.js"></script>
+      <script src="app/controllers/attendance.js"></script>
+      <script src="app/controllers/block-cost-sheet.js"></script>
+      <script src="app/controllers/block-stage.js"></script>
+      <script src="app/controllers/blocks.js"></script>
+      <script src="app/controllers/campaigns.js"></script>
+      <script src="app/controllers/convert-customer.js"></script>
+      <script src="app/controllers/cost-sheet-templates.js"></script>
+      <script src="app/controllers/costsheet.js"></script>
+      <script src="app/controllers/customers.js"></script>
+      <script src="app/controllers/dashboard.js"></script>
+      <script src="app/controllers/departments.js"></script>
+      <script src="app/controllers/email-templates.js"></script>
+      <script src="app/controllers/employees.js"></script>
+      <script src="app/controllers/generate-cost-sheet.js"></script>
+      <script src="app/controllers/heirarchy.js"></script>
+      <script src="app/controllers/leads.js"></script>
+      <script src="app/controllers/payment-schedule.js"></script>
+      <script src="app/controllers/phases.js"></script>
+      <script src="app/controllers/projects.js"></script>
+      <script src="app/controllers/prospects.js"></script>
+      <script src="app/controllers/salary-components.js"></script>
+      <script src="app/controllers/sales-funnel.js"></script>
+      <script src="app/controllers/site-visit-listing.js"></script>
+      <script src="app/controllers/unit-generation.js"></script>
+      <script src="app/controllers/unit-listing.js"></script>
+      <script src="app/controllers/units.js"></script>
+      <!-- Scripts -->
+       
+      <!-- Styles -->
+      <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="assets/css/prathamClient.css"/>
+      <link rel="stylesheet" href="assets/css/prathamMediaQueryClient.css"/>
+      <link rel="stylesheet" href="assets/css/jquery.orgchart.css"/>
+      <link rel="stylesheet" href="assets/css/angular-datepicker.css"/>
+      <link rel="stylesheet" href="assets/css/summernote.css"/>
+      <!-- Styles -->
+       
+   </head>
+   <body>
+      <div class="container-fluid">
+         <div class="row header">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+               <a ui-sref="/">
+               <span class="logo-text">
+               Company
+               </span>
+               </a>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-4">
+               <input type="text" class="form-control search" placeholder="Search Here"/>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 headerRight">
+               <span class="glyphicon glyphicon-log-out whiteIcon24 marginRight10" title="Logout" ng-click="logout()"></span>
+               <span class="glyphicon glyphicon-user whiteIcon24 marginRight10" title="User"></span>
+               <span class="glyphicon glyphicon-question-sign whiteIcon24" title="Help"></span>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs leftPanel">
+               <ul class="leftMenu">
+                  <li>
+                     <span class="glyphicon glyphicon-user"></span> Leads
+                     <ul>
+                        <li class="">
+                           <a ui-sref="/Leads">Quick View</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <span class="glyphicon glyphicon-user"></span> Prospects
+                     <ul>
+                        <li class="">
+                           <a ui-sref="/Prospects">Quick View</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/ProspectsUnitAllocation">Allocated Units</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <span class="glyphicon glyphicon-user"></span> Customers
+                     <ul>
+                        <li>
+                           <a ui-sref="/Customers">Quick View</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/">Allocated Units</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <span class="glyphicon glyphicon-user"></span> Employees
+                     <ul>
+                        <li>
+                           <a ui-sref="/EmployeeDetails">Quick View</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <span class="glyphicon glyphicon-user"></span> Agents
+                     <ul>
+                        <li>
+                           <a ui-sref="/Agents">Quick View</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <span class="glyphicon glyphicon-flag"></span> Project
+                     <ul>
+                        <li>
+                           <a ui-sref="/Projects">Project</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/Phases">Phase</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/">Block</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/UnitsListing">Units Listing</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/BlockCostSheet">Cost Sheet</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/">Allocated Units</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/">Block Unit</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <span class="glyphicon glyphicon-flag"></span> CRM
+                     <ul>
+                        <li>
+                           <a ui-sref="/">Campaigns</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/SalesFunnel">Sales Funnel</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/AlertRules">Alert Rules</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/EmailTemplates">Email Templates</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/SiteVisitListing">Site Visit Listing</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/Attendance">Attendance</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li>
+                     <span class="glyphicon glyphicon-flag"></span> Set Up
+                     <ul>
+                        <li>
+                           <a ui-sref="/AccessRights">Access Rights</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/AddDepartment">Department</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/Heirarchy">Department Heirarchy</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/CostSheetTemplates">Cost Sheet Template</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/SalaryComponentDetails">Salary Component</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/BlockStage">Block Stage</a>
+                        </li>
+                        <li>
+                           <a ui-sref="/PaymentSchedule">Payment Schedule</a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 pageContent" ui-view="" autoscroll="false"></div>
+         </div>
+         <div class="row footer">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+               &copy; 2017 Pratham Pvt. Ltd.
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-center">
+               Powered By: Pratham
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-right">
+               <a href="#">About</a> | 
+               <a href="#">Contact</a> | 
+               <a href="#">Help</a>
+            </div>
+         </div>
+      </div>      
+      <div class="loader">
+         <img src="assets/img/gears.gif"/>
+      </div>
+      <div class="messageCntr" ng-show="showAppMsg">
+         <span>{{appMsg}}</span>
+      </div>
+   </body>
+</html>

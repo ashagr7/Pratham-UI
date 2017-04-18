@@ -1,0 +1,109 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle">
+   <h1>{{pageTitle}}</h1>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a ui-sref="/Phases">Phases</a></li>
+      <li class="active">{{pageTitle}}</li>
+   </ol>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs"></div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<form name="addPhaseForm" class="form" method="POST" novalidate="novalidate">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="type">Project Name</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                <select ng-model="projectDetails.projectName" name="projectName" class="form-control" autofocus="true" ng-disabled="true">
+                    <option value="">
+                        Project
+                    </option>
+                    <option ng-repeat="x in projectList" value="{{x.ProjId}}">
+                        {{x.Proj_Name}}
+                    </option>
+                </select>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="type">Phase Name</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <input type="text" class="form-control" id="phaseName" name="phaseName" ng-model="projectDetails.phaseName" ng-required="true" ng-class="{blankInput: addPhaseForm.phaseName.$error.required &amp;&amp; submit}"/>
+			</div>
+		</div>        
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="type">Location</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <input type="text" class="form-control" id="location" name="location" ng-model="projectDetails.location" ng-required="true" ng-class="{blankInput: addPhaseForm.location.$error.required &amp;&amp; submit}"/>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="surveyNos">Survey Nos</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+				<input type="text" class="form-control" id="surveyNos" name="surveyNos" ng-model="projectDetails.surveyNos" ng-required="true" ng-class="{blankInput: addPhaseForm.surveyNos.$error.required &amp;&amp; submit}"/>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="type">No. Of Blocks</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+                    <input type="number" class="form-control" name="noOfBlocks" ng-model="projectDetails.noOfBlocks" ng-required="true" ng-change="appendFields(projectDetails.noOfBlocks)" ng-disabled="editPhaseBtn" ng-class="{blankInput: addPhaseForm.noOfBlocks.$error.required &amp;&amp; submit}" id="blockCount"/>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0" ng-show="editPhaseBtn">
+            <button type="button" name="addBlock" id="addBlock" class="btn btn-default" ng-click="appendFields()">Add Block</button>
+        </div>
+        <div id="noOfBlocks" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0"></div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="type">Type</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+				<select name="phaseType" ng-model="projectDetails.phaseType" class="form-control" id="type">
+					<option value="1">
+						Flat
+					</option>
+					<option value="2">
+						Plot
+					</option>
+					<option value="3">
+						Villa
+					</option>
+				</select>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="type">Unit Of Msrmt.</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+				<select name="phaseType" ng-model="projectDetails.unitOfMeasurement" class="form-control" id="type">
+					<option value="1">
+						Sq. Feet
+					</option>
+					<option value="2">
+						Sq. Meter
+					</option>
+					<option value="3">
+						Sq. Yards
+					</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right padding0 marginTop10" ng-show="addPhaseBtn">
+			<button type="button" class="btn btn-success" ng-click="addPhase(projectDetails,'addPhaseForm')">Save & Next</button>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right padding0 marginTop10" ng-show="editPhaseBtn">
+			<button type="button" class="btn btn-success" ng-click="editPhase(projectDetails,'addPhaseForm')">Update & Next</button>
+		</div>
+	</form>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs"></div>

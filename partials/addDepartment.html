@@ -1,0 +1,67 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center pageTitle marginBottom20">
+   <h1>Add New Department</h1>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-3 hidden-xs"></div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<form name="addDepartmentForm" class="form" method="POST" novalidate="novalidate">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="projectName">Department Name</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+				<input type="text" class="form-control" placeholder="Department Name *" name="departmentName" ng-model="addDepartment.departmentName" ng-required="true" ng-class="{blankInput: addDepartmentForm.departmentName.$error.required &amp;&amp; submit}" autofocus/>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="projectName">Parent Department</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+				<select ng-model="addDepartment.parentDepartment" name="parentDepartment" class="form-control" ng-required="true" ng-class="{blankInput: addDepartmentForm.parentDepartment.$error.required &amp;&amp; submit}">
+                  <option value="">
+                     Select Parent Department
+                  </option>
+                  <option ng-repeat="x in parentDepartmentList" value="{{x.dept_id}}">
+                     {{x.dept_name}}
+                  </option>
+               </select>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="projectName">Manager Name</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+				<select ng-model="addDepartment.managerName" name="managerName" class="form-control" ng-required="true" ng-class="{blankInput: addDepartmentForm.managerName.$error.required &amp;&amp; submit}">
+                  <option value="">
+                     Select Manager Name
+                  </option>
+                  <option ng-repeat="x in managersList" value="{{x.user_id}}">
+                     {{x.user_first_name + " "}}{{x.user_middle_name + " "}}{{x.user_last_name}}
+                  </option>
+               </select>
+			</div>
+		</div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 labelCntr">
+				<label for="projectName">Branch</label>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 padding0">
+				<select ng-model="addDepartment.branchName" name="branchName" class="form-control" ng-required="true" ng-class="{blankInput: addDepartmentForm.branchName.$error.required &amp;&amp; submit}">
+                  <option value="">
+                     Select Branch Name
+                  </option>
+                  <option value="1">
+                     Delhi
+                  </option>
+                  <option value="2">
+                     Noida
+                  </option>
+               </select>
+			</div>
+		</div>
+	</form>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right padding0 marginTop10">
+        <button type="button" class="btn btn-success" ng-click="addNewDepartment(addDepartment,'addDepartmentForm')">Save</button>
+    </div>
+</div>
